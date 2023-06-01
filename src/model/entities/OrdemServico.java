@@ -1,4 +1,7 @@
-package entidades;
+package model.entities;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class OrdemServico {
 	
@@ -6,10 +9,12 @@ public class OrdemServico {
 	private Cliente id_cliente;
 	private String observacao;
 	
+	private List<Pedido> item = new ArrayList<>(); // 'OS' contem varios itens 
+	
 	public OrdemServico() {		
 	}
 
-	public OrdemServico(Integer id_ordem, Cliente id_cliente, String observacao) {
+	public OrdemServico(Cliente id_cliente, String observacao) {
 		this.observacao = observacao;
 	}
 
@@ -48,10 +53,12 @@ public class OrdemServico {
 				+ "]";
 	}
 	
+	public void addItem(Pedido item) {
+		this.item.add(item); // Adicionar item a 'OS'
+	}
 	
+	public void removeItem(Pedido item) {
+		this.item.remove(item); // remover item da 'OS'
+	}
 	
-	
-	
-	
-
 }

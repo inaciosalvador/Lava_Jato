@@ -1,4 +1,7 @@
-package entidades;
+package model.entities;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class Cliente {
 	
@@ -7,11 +10,12 @@ public class Cliente {
 	private String telefone;
 	private String cpf_cnpj;
 	
+	private List<Veiculo> veiculo = new ArrayList<>();
+	
 	public Cliente() {		
 	}
 
-	public Cliente(Integer id_cliente, String nome, String telefone, String cpf_cnpj) {
-		this.id_cliente = id_cliente;
+	public Cliente(String nome, String telefone, String cpf_cnpj) {
 		this.nome = nome;
 		this.telefone = telefone;
 		this.cpf_cnpj = cpf_cnpj;

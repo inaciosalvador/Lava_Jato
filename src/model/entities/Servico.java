@@ -1,4 +1,4 @@
-package entidades;
+package model.entities;
 
 public class Servico {
 	
@@ -9,8 +9,7 @@ public class Servico {
 	public Servico() {		
 	}
 
-	public Servico(Integer id_servico, String descricao, Double preco) {
-		this.id_servico = id_servico;
+	public Servico(String descricao, Double preco) {
 		this.descricao = descricao;
 		this.preco = preco;
 	}
@@ -49,6 +48,5 @@ public class Servico {
 				+ preco
 				+ "]";
 	}
-	
 
 }

@@ -1,4 +1,4 @@
-package entidades;
+package model.entities;
 
 public class Veiculo {
 	
@@ -12,10 +12,7 @@ public class Veiculo {
 	public Veiculo() {		
 	}
 	
-	public Veiculo(Integer id_veiculo, Cliente proprietario, String placa, String fabricante, String modelo,
-			String tipo_veiculo) {
-
-		this.id_veiculo = id_veiculo;
+	public Veiculo(Cliente proprietario, String placa, String fabricante, String modelo, String tipo_veiculo) {
 		this.proprietario = proprietario;
 		this.placa = placa;
 		this.fabricante = fabricante;
@@ -84,8 +81,7 @@ public class Veiculo {
 				+ ", modelo="
 				+ modelo
 				+ ", tipo_veiculo="
-				+ tipo_veiculo
-				+ "]";
+				+ tipo_veiculo + "]";
 	}
 	
 	

@@ -1,4 +1,4 @@
-package aplicacao;
+package application;
 
 import java.sql.Connection;
 import java.sql.ResultSet;
