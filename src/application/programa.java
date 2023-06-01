@@ -1,16 +1,21 @@
 package application;
 
-import java.sql.Connection;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
-
-import db.DB;
+import model.dao.ClienteDao;
+import model.dao.DaoFactory;
+import model.entities.Cliente;
 
 public class programa {
 
 	public static void main(String[] args) {
-
+		
+		ClienteDao clienteDao = DaoFactory.CadClienteDao();
+		
+		Cliente cliente = clienteDao.pesquisaId(1);
+		
+		System.out.println(cliente);
+		
+		
+		/*
 		Connection conn = null;
 		Statement st = null;
 		ResultSet rs = null;
@@ -37,5 +42,6 @@ public class programa {
 			DB.closeStatement(st);
 			DB.closeConnection();
 		}
+		*/
 	}
 }
