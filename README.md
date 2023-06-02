@@ -8,6 +8,9 @@ Este é um sistema desenvolvido em **Java** para gerenciar as operações de um 
 
 - Tela de pedidos: Através dessa tela, é possível registrar os serviços solicitados pelos clientes, bem como o valor correspondente a cada pedido. Isso proporciona um controle preciso sobre as transações realizadas.
 
+## Modelagem do Banco
+![Modelagem do Banco de Dados](https://github.com/inaciosalvador/Lava_Jato/assets/112987249/5a6bdb16-33c3-4519-baeb-bdb9e1027457)
+
 ## Tecnologias utilizadas
 
 - Linguagem: **Java**
@@ -33,6 +36,7 @@ Contribuições são bem-vindas! Se você tiver alguma melhoria ou correção a 
 Este projeto está licenciado sob a [Licença MIT](https://github.com/inaciosalvador/Lava_Jato/blob/main/LICENSE).
 
 ## Contato
+
 
 - Inacio Salvador - inaciosalvador03@gmail.com
 - Link para o repositório: [Lava-Jato](https://github.com/inaciosalvador/Lava_Jato)
