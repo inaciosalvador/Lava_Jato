@@ -1,10 +1,10 @@
 # Sistema para Lava Jato
 
-Este é um sistema desenvolvido em **Java** para gerenciar as operações de um lava jato. Com esse sistema, é possível cadastrar serviços (ex: lavagem simples, especial etc), clientes e seus respectivos veículos, além de ter uma tela de pedidos para manipulação das transações e vendas.
+Este é um sistema desenvolvido em **Java** para gerenciar as operações de um lava jato. Com esse sistema, é possível cadastrar serviços, clientes e seus respectivos veículos, além de ter uma tela de pedidos para manipulação das transações e vendas.
 
 ## Funcionalidades
 
-- Cadastro de clientes e veículos: O sistema permite o cadastro de serviços, clientes e seus veículos associados. Não há limitações quanto ao número de veículos que um cliente pode cadastrar.
+- Cadastro de Serviços, clientes e veículos: O sistema permite o cadastro de serviços (ex: lavagem simples, especial etc), clientes e seus veículos associados. Não há limitações quanto ao número de veículos que um cliente pode cadastrar.
 
 - Tela de pedidos: Através dessa tela, é possível registrar os serviços solicitados pelos clientes, bem como o valor correspondente a cada pedido. Isso proporciona um controle preciso sobre as transações realizadas.
 
