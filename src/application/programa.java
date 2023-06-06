@@ -1,22 +1,22 @@
 package application;
 
-import model.dao.ClienteDao;
-import model.dao.DaoFactory;
-import model.entities.Cliente;
+import dao.ServicoDao;
+import entities.Servico;
 
 public class programa {
 
 	public static void main(String[] args) {
 		
-		ClienteDao clienteDao = DaoFactory.CadClienteDao();
 		
-		Cliente cliente = clienteDao.pesquisaId(1);
+		Servico s = new Servico();
+		ServicoDao sdao = new ServicoDao();
+		s.create();
+		sdao.create(s);
 		
-		System.out.println(cliente);
+		System.out.println("Cadastrado com sucesso! ");
 		
 		
-		/*
-		Connection conn = null;
+		/*Connection conn = null;
 		Statement st = null;
 		ResultSet rs = null;
 
@@ -41,7 +41,7 @@ public class programa {
 			DB.closeResultSet(rs);
 			DB.closeStatement(st);
 			DB.closeConnection();
-		}
-		*/
+		}*/
+		
 	}
 }

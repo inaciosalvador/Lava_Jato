@@ -1,4 +1,4 @@
-package model.entities;
+package entities;
 
 public class Veiculo {
 	
