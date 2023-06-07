@@ -2,8 +2,13 @@ package entities;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Scanner;
 
-public class Cliente {
+import dao.CrudDAO;
+
+public class Cliente implements CrudDAO<Cliente>{
+	
+	Scanner teclado = new Scanner(System.in);
 	
 	private Integer id_cliente;
 	private String nome;
@@ -14,7 +19,7 @@ public class Cliente {
 	
 	public Cliente() {		
 	}
-
+													
 	public Cliente(String nome, String telefone, String cpf_cnpj) {
 		this.nome = nome;
 		this.telefone = telefone;
@@ -64,6 +69,45 @@ public class Cliente {
 				+ ", cpf_cnpj="
 				+ cpf_cnpj + "]";
 	}
+
+	@Override
+	public Cliente create() {
+		
+		System.out.println("=== Cadastro de Cliente ===");
+		
+		System.out.println("Insira o nome do cliente: ");
+		nome = teclado.nextLine();
+		
+		System.out.println("Insira o numero de telefone: (DDD + numero) sem espaços. ");
+		telefone = teclado.nextLine();
+		
+		System.out.println("Insira o CPF ou CNPJ: ");
+		cpf_cnpj = teclado.nextLine();
+		
+		Cliente novoCliente = new Cliente(nome, telefone, cpf_cnpj);
+		return novoCliente;
+				
+	}
+
+	@Override
+	public Cliente read(Cliente id) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Cliente update(Cliente id) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Cliente delete(Cliente id) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	
+	
 	
 	
 }

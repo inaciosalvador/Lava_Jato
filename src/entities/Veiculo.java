@@ -1,6 +1,12 @@
 package entities;
 
-public class Veiculo {
+import java.util.Scanner;
+
+import dao.CrudDAO;
+
+public class Veiculo implements CrudDAO<Veiculo> {
+	
+	Scanner teclado = new Scanner(System.in);
 	
 	private Integer id_veiculo;
 	private Cliente proprietario;
@@ -12,8 +18,7 @@ public class Veiculo {
 	public Veiculo() {		
 	}
 	
-	public Veiculo(Cliente proprietario, String placa, String fabricante, String modelo, String tipo_veiculo) {
-		this.proprietario = proprietario;
+	public Veiculo(String placa, String fabricante, String modelo, String tipo_veiculo) {
 		this.placa = placa;
 		this.fabricante = fabricante;
 		this.modelo = modelo;
@@ -83,6 +88,45 @@ public class Veiculo {
 				+ ", tipo_veiculo="
 				+ tipo_veiculo + "]";
 	}
+
+	@Override
+	public Veiculo create() {
+		System.out.println("=== Cadastro do veiculo ===");
+		
+		System.out.println("Insira a placa do veiculo");
+		placa = teclado.nextLine();
+		
+		System.out.println("Fabricante: ");
+		fabricante = teclado.nextLine();
+		
+		System.out.println("Modelo: ");
+		modelo = teclado.nextLine();
+		
+		System.out.println("Tipo de veiculo: ");
+		tipo_veiculo = teclado.nextLine();
+		
+		Veiculo veiculo = new Veiculo(placa, fabricante, modelo, tipo_veiculo);
+		return veiculo;
+	}
+
+	@Override
+	public Veiculo read(Veiculo id) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Veiculo update(Veiculo id) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Veiculo delete(Veiculo id) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	
 	
 	
 	

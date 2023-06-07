@@ -1,19 +1,35 @@
 package application;
 
+import dao.ClienteDao;
 import dao.ServicoDao;
+import dao.VeiculoDao;
+import entities.Cliente;
 import entities.Servico;
+import entities.Veiculo;
 
 public class programa {
 
 	public static void main(String[] args) {
 		
 		
-		Servico s = new Servico();
+		/*Servico s = new Servico();
 		ServicoDao sdao = new ServicoDao();
 		s.create();
 		sdao.create(s);
+		*/
 		
-		System.out.println("Cadastrado com sucesso! ");
+		Cliente c = new Cliente();
+		ClienteDao cDao = new ClienteDao();
+		c.create();
+		cDao.create(c);
+		
+		Veiculo v = new Veiculo();
+		VeiculoDao vDao = new VeiculoDao();
+		v.create();
+		vDao.create(v);
+		vDao.insertProprietario(c);	
+		
+		
 		
 		
 		/*Connection conn = null;

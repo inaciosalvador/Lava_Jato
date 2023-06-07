@@ -12,7 +12,8 @@ import entities.Servico;
 public class ServicoDao {
 
 	public void create(Servico servico) {
-		String sql = "INSERT INTO servico (descricao, preco)" + " VALUES (?, ?)";
+		String sql = "INSERT INTO servico (descricao, preco)" + 
+					 " VALUES (?, ?)";
 
 		try (Connection connection = DB.getConnection()) {
 			PreparedStatement statement = connection.prepareStatement(sql);

@@ -5,6 +5,8 @@ import java.util.Scanner;
 import dao.CrudDAO;
 
 public class Servico implements CrudDAO<Servico> {
+	
+	Scanner teclado = new Scanner(System.in);
 
 	private Integer id_servico;
 	private String descricao;
@@ -49,19 +51,15 @@ public class Servico implements CrudDAO<Servico> {
 
 	public Servico create() {
 		
-		Scanner teclado = new Scanner(System.in);
-
 		System.out.println("===== Cadastro de Serviços =====");
 
 		System.out.println("Digite o nome do serviço: ");
 		descricao = teclado.nextLine();
 		
-
 		System.out.println("Informe o preço unitario: ");
 		preco = teclado.nextDouble();
 		
 		Servico novoServico = new Servico(descricao, preco);
-		
 		return novoServico;
 
 	}
