@@ -18,7 +18,7 @@ public class VeiculoDao {
 		
 		String retornarProprietario = "SELECT id_cliente FROM cliente WHERE cpf_cnpj = (?)";
 		
-		int idCliente = -1; // ID que será associado ao veiculo
+		int idCliente = -1; // Para guardar o ID do cliente
 		
 		
 		Connection connection = null;
