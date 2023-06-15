@@ -2,9 +2,8 @@ package entities;
 
 import java.util.Scanner;
 
-import dao.CrudDAO;
 
-public class Servico implements CrudDAO<Servico> {
+public class Servico{
 	
 	Scanner teclado = new Scanner(System.in);
 
@@ -62,24 +61,6 @@ public class Servico implements CrudDAO<Servico> {
 		Servico novoServico = new Servico(descricao, preco);
 		return novoServico;
 
-	}
-
-	@Override
-	public Servico read(Servico id) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public Servico update(Servico id) {
-		
-		return null;
-	}
-
-	@Override
-	public Servico delete(Servico id) {
-		
-		return null;
 	}
 
 }

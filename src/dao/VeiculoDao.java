@@ -2,9 +2,7 @@ package dao;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
-import java.sql.ResultSet;
 import java.sql.SQLException;
-
 import db.DB;
 import db.DbException;
 import entities.Cliente;
@@ -14,9 +12,14 @@ public class VeiculoDao {
 
 	public void create(Veiculo veiculo) {
 		
-		String sql = "INSERT INTO veiculo (placa, fabricante, modelo, tipo_veiculo)" + " VALUES (?, ?, ?, ?)";
-
-		try (Connection connection = DB.getConnection()) {
+		String sql = "INSERT INTO veiculo (placa, fabricante, modelo, tipo_veiculo)" +
+		             " VALUES (?, ?, ?, ?)";
+		
+		Connection connection = null;
+				
+		try {
+			
+			connection = DB.getConnection();
 
 			PreparedStatement statement = connection.prepareStatement(sql);
 			statement.setString(1, veiculo.getPlaca());
@@ -29,11 +32,20 @@ public class VeiculoDao {
 
 		} catch (SQLException e) {
 			throw new DbException(e.getMessage());
+		} finally {
+			if(connection != null) {
+				try {
+                    connection.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+			}
 		}
+		
 	}
 
 	public void insertProprietario(Cliente cliente) {
-		String sql = "update veiculo set proprietario = (?) where = null";
+		String sql = "UPDATE veiculo SET proprietario = ? WHERE proprietario IS NULL";
 
 		try (Connection connection = DB.getConnection()) {
 
@@ -45,6 +57,6 @@ public class VeiculoDao {
 
 		} catch (SQLException e) {
 			throw new DbException(e.getMessage());
-		}
+		} 
 	}
 }

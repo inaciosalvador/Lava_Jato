@@ -4,9 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
-import dao.CrudDAO;
-
-public class Cliente implements CrudDAO<Cliente>{
+public class Cliente {
 	
 	Scanner teclado = new Scanner(System.in);
 	
@@ -70,7 +68,6 @@ public class Cliente implements CrudDAO<Cliente>{
 				+ cpf_cnpj + "]";
 	}
 
-	@Override
 	public Cliente create() {
 		
 		System.out.println("=== Cadastro de Cliente ===");
@@ -89,25 +86,4 @@ public class Cliente implements CrudDAO<Cliente>{
 				
 	}
 
-	@Override
-	public Cliente read(Cliente id) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public Cliente update(Cliente id) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public Cliente delete(Cliente id) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-	
-	
-	
-	
 }

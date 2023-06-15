@@ -2,9 +2,7 @@ package entities;
 
 import java.util.Scanner;
 
-import dao.CrudDAO;
-
-public class Veiculo implements CrudDAO<Veiculo> {
+public class Veiculo {
 	
 	Scanner teclado = new Scanner(System.in);
 	
@@ -89,10 +87,9 @@ public class Veiculo implements CrudDAO<Veiculo> {
 				+ tipo_veiculo + "]";
 	}
 
-	@Override
+	
 	public Veiculo create() {
-		System.out.println("=== Cadastro do veiculo ===");
-		
+
 		System.out.println("Insira a placa do veiculo");
 		placa = teclado.nextLine();
 		
@@ -108,27 +105,5 @@ public class Veiculo implements CrudDAO<Veiculo> {
 		Veiculo veiculo = new Veiculo(placa, fabricante, modelo, tipo_veiculo);
 		return veiculo;
 	}
-
-	@Override
-	public Veiculo read(Veiculo id) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public Veiculo update(Veiculo id) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public Veiculo delete(Veiculo id) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-	
-	
-	
-	
 	
 }
