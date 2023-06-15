@@ -85,5 +85,15 @@ public class Cliente {
 		return novoCliente;
 				
 	}
+	
+	// metodo envia o cpf ou cnpj para outras classes,
+	// até o momento está sendo usado para cadastrar um novo veiculo ao cliente
+	public String readByDoc() {
+		
+		System.out.println("Insira o CPF ou CNPJ do cliente (SEM PONTOS E TRAÇOS): ");
+		String docCliente = teclado.nextLine();
+		
+		return docCliente;		
+	}
 
 }

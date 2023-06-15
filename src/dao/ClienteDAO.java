@@ -10,7 +10,7 @@ import db.DB;
 import entities.Cliente;
 import entities.Veiculo;
 
-public class CadastrarNovoClienteDAO {
+public class ClienteDAO {
 
 	public void create(Cliente cliente, Veiculo veiculo) throws SQLException {
 

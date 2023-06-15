@@ -2,6 +2,7 @@ package dao;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import db.DB;
 import db.DbException;
@@ -10,28 +11,46 @@ import entities.Veiculo;
 
 public class VeiculoDao {
 
-	public void create(Veiculo veiculo) {
+	public void addNewVeiculo(String cpf_cnpj, Veiculo veiculo) throws SQLException {
 		
-		String sql = "INSERT INTO veiculo (placa, fabricante, modelo, tipo_veiculo)" +
-		             " VALUES (?, ?, ?, ?)";
+		String sqlAddVeiculo = "INSERT INTO veiculo (proprietario, placa, fabricante, modelo, tipo_veiculo)" +
+		             " VALUES (?, ?, ?, ?, ?)";
+		
+		String retornarProprietario = "SELECT id_cliente FROM cliente WHERE cpf_cnpj = (?)";
+		
+		int idCliente = -1; // ID que será associado ao veiculo
+		
 		
 		Connection connection = null;
 				
 		try {
 			
 			connection = DB.getConnection();
-
-			PreparedStatement statement = connection.prepareStatement(sql);
-			statement.setString(1, veiculo.getPlaca());
-			statement.setString(2, veiculo.getFabricante());
-			statement.setString(3, veiculo.getModelo());
-			statement.setString(4, veiculo.getTipo_veiculo());
-			statement.executeUpdate();
+			connection.setAutoCommit(false); // desativando o autocommit
 			
-			System.out.println("Veiculo cadastrato! ");
+			
+			PreparedStatement statementIdCliente = connection.prepareStatement(retornarProprietario);
+			statementIdCliente.setString(1, cpf_cnpj);
+			ResultSet resultSet = statementIdCliente.executeQuery();
+			if(resultSet.next()) {
+				idCliente = resultSet.getInt("id_cliente"); // id do proprietario
+			}
+
+			PreparedStatement statementNewVeiculo = connection.prepareStatement(sqlAddVeiculo);
+			statementNewVeiculo.setInt(1, idCliente);
+			statementNewVeiculo.setString(2, veiculo.getPlaca());
+			statementNewVeiculo.setString(3, veiculo.getFabricante());
+			statementNewVeiculo.setString(4, veiculo.getModelo());
+			statementNewVeiculo.setString(5, veiculo.getTipo_veiculo());
+			statementNewVeiculo.executeUpdate();
+			connection.commit(); // Confirmação para efetuar os comandos.
+			
+			System.out.println("Veiculo associado ao cliente " + idCliente + " com sucesso! ");
 
 		} catch (SQLException e) {
-			throw new DbException(e.getMessage());
+			connection.rollback();
+			System.out.println("Erro ao cadastrar veiculo: " + e.getMessage());
+			
 		} finally {
 			if(connection != null) {
 				try {
@@ -43,20 +62,5 @@ public class VeiculoDao {
 		}
 		
 	}
-
-	public void insertProprietario(Cliente cliente) {
-		String sql = "UPDATE veiculo SET proprietario = ? WHERE proprietario IS NULL";
-
-		try (Connection connection = DB.getConnection()) {
-
-			PreparedStatement statement = connection.prepareStatement(sql);
-			statement.setInt(1, cliente.getId_cliente());
-			statement.executeUpdate();
-			
-			System.out.println("Proprietário associado corretamente");
-
-		} catch (SQLException e) {
-			throw new DbException(e.getMessage());
-		} 
-	}
+	
 }

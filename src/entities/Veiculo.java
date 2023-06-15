@@ -88,7 +88,7 @@ public class Veiculo {
 	}
 
 	
-	public Veiculo create() {
+	public Veiculo createVeiculo() {
 
 		System.out.println("Insira a placa do veiculo");
 		placa = teclado.nextLine();
@@ -105,5 +105,5 @@ public class Veiculo {
 		Veiculo veiculo = new Veiculo(placa, fabricante, modelo, tipo_veiculo);
 		return veiculo;
 	}
-	
+		
 }
