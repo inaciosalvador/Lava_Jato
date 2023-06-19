@@ -8,8 +8,6 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.mysql.cj.xdevapi.Result;
-
 import db.DB;
 import entities.Cliente;
 import entities.Veiculo;
@@ -81,7 +79,7 @@ public class ClienteDAO {
 
 	public void read() throws SQLException {
 
-		String sqlCliente = "SELECT * FROM CLIENTE;";
+		String sqlCliente = "SELECT * FROM CLIENTE ORDER BY id_cliente;";
 		String sqlVeiculo = "SELECT * FROM VEICULO;";
 
 		PreparedStatement st1 = null;
@@ -100,6 +98,17 @@ public class ClienteDAO {
 			st2 = connection.prepareStatement(sqlVeiculo);
 			rs2 = st2.executeQuery();
 			
+			List<Veiculo> veiculos = new ArrayList<>();
+
+			while (rs2.next()) {
+			    Veiculo veiculo = new Veiculo();
+			    veiculo.setProprietario(rs2.getInt("proprietario"));
+			    veiculo.setPlaca(rs2.getString("placa"));
+			    veiculo.setFabricante(rs2.getString("fabricante"));
+			    veiculo.setModelo(rs2.getString("modelo"));
+			    veiculo.setTipo_veiculo(rs2.getString("tipo_veiculo"));
+			    veiculos.add(veiculo);
+			}
 			
 			System.out.println(" ===== Lista de clientes ===== ");
 			System.out.println("");
@@ -113,7 +122,18 @@ public class ClienteDAO {
 
 				System.out.println("             ***            ");
 				
-				//logica para mostrar os veiculos aqui
+				int countVeiculo = 1;
+				
+				for(Veiculo veiculo: veiculos) {
+					
+					if(veiculo.getProprietario() == rs1.getInt("id_cliente")) {
+						System.out.println("Veiculo: " + countVeiculo);
+						System.out.println("Modelo: " + veiculo.getModelo());
+						System.out.println("Placa: " + veiculo.getPlaca());
+						countVeiculo ++;
+						System.out.println("      -      ");
+					}
+				}
 				
 
 				System.out.println("=================================================");

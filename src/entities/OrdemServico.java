@@ -8,6 +8,7 @@ public class OrdemServico {
 	private Integer id_ordem;
 	private Cliente id_cliente;
 	private String observacao;
+	private Double valor_os;
 	
 	private List<Pedido> item = new ArrayList<>(); // 'OS' contem varios itens 
 	
@@ -42,6 +43,14 @@ public class OrdemServico {
 		this.observacao = observacao;
 	}
 
+	public Double getValor_os() {
+		return valor_os;
+	}
+
+	public void setValor_os(Double valor_os) {
+		this.valor_os = valor_os;
+	}
+
 	@Override
 	public String toString() {
 		return "OrdemServico [id_ordem="
@@ -60,5 +69,4 @@ public class OrdemServico {
 	public void removeItem(Pedido item) {
 		this.item.remove(item); // remover item da 'OS'
 	}
-	
 }

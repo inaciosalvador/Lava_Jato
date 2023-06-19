@@ -7,7 +7,7 @@ public class Veiculo {
 	Scanner teclado = new Scanner(System.in);
 	
 	private Integer id_veiculo;
-	private Cliente proprietario;
+	private int proprietario;
 	private String placa;
 	private String fabricante;
 	private String modelo;
@@ -31,12 +31,12 @@ public class Veiculo {
 		this.id_veiculo = id_veiculo;
 	}
 
-	public Cliente getProprietario() {
+	public int getProprietario() {
 		return proprietario;
 	}
 
-	public void setProprietario(Cliente proprietario) {
-		this.proprietario = proprietario;
+	public void setProprietario(int i) {
+		this.proprietario = i;
 	}
 
 	public String getPlaca() {
