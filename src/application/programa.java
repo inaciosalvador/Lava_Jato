@@ -7,6 +7,7 @@ import java.util.Scanner;
 
 import dao.ClienteDAO;
 import entities.Cliente;
+import entities.Veiculo;
 
 public class programa {
 
@@ -14,7 +15,32 @@ public class programa {
 		
 		Scanner teclado = new Scanner(System.in);
 		
-		/*Cliente cliente = new Cliente(); // está recebendo o cliente do banco 
+					// cadastrar cliente
+		/*
+		Cliente c = new Cliente();
+		Veiculo v = new Veiculo();
+		ClienteDAO cdao = new ClienteDAO();
+		
+		c.create();
+		v.createVeiculo();
+		cdao.create(c, v);
+		*/
+		
+		
+		//-------------------------------------------------------
+		
+					// Listar todos os clientes
+		
+		/*
+		ClienteDAO cdao = new ClienteDAO();
+		cdao.read();
+		*/
+		
+		//-------------------------------------------------------
+		
+						// editar clientes
+		/*
+		Cliente cliente = new Cliente(); // está recebendo o cliente do banco 
 		ClienteDAO c = new ClienteDAO(); // usado para operar no banco
 		Cliente cliente1 = new Cliente(); // usado para atualizar o objeto na classe 
 				
@@ -23,10 +49,14 @@ public class programa {
 		
 		cliente = c.findByID(doc); 
 		cliente1 = cliente.update(cliente); // contem o objeto alterado
-		c.update(cliente1);*/
+		c.update(cliente1);
+		*/
 		
 		//-------------------------------------------------------
 		
+					// deletar clientes
+		
+		 /*
 		Cliente c = new Cliente();
 		ClienteDAO cdao = new ClienteDAO();
 		
@@ -34,31 +64,8 @@ public class programa {
 		String doc = teclado.nextLine();
 		
 		c = cdao.findByID(doc); // guarda o cliente que será apagado
-		System.out.println(c);
 		cdao.delete(c);
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		//c1.update(cliente1);
-		
-		
-		
-		
-		
-		
-		
-		
+		*/
 		
 		
 		
