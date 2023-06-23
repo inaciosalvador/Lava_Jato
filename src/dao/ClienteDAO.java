@@ -121,7 +121,7 @@ public class ClienteDAO {
 				System.out.println("Telefone: " + rs1.getString("telefone"));
 				System.out.println("Numero de Documento: " + rs1.getString("cpf_cnpj"));
 
-				System.out.println("             ***            ");
+				System.out.println("             ---            ");
 
 				int countVeiculo = 1;
 
@@ -135,9 +135,6 @@ public class ClienteDAO {
 						System.out.println("      -      ");
 					}
 				}
-
-				System.out.println("=================================================");
-
 			}
 
 			connection.commit(); // Confirmação para efetuar os comandos.
@@ -148,6 +145,8 @@ public class ClienteDAO {
 		} finally {
 			DB.closeResultSet(rs1);
 			DB.closeStatement(st1);
+			DB.closeResultSet(rs2);
+			DB.closeStatement(st2);
 			DB.closeConnection();
 		}
 	}
@@ -177,8 +176,6 @@ public class ClienteDAO {
 				cliente.setCpf_cnpj(rs1.getString("cpf_cnpj"));
 			}
 
-			
-
 		} catch (Exception e) {
 			connection.rollback();
 			e.printStackTrace();
@@ -186,18 +183,14 @@ public class ClienteDAO {
 			DB.closeResultSet(rs1);
 			DB.closeStatement(st1);
 		}
-		
-		return cliente;
+		return cliente; // cliente será usado para o metodo update
 	}
 
 	public void update(Cliente cliente) throws SQLException {
 
-		String sqlUpdate = "update cliente set nome = (?), telefone = (?), cpf_cnpj = (?)"
-						 + " where id_cliente = (?)";
+		String sqlUpdate = "update cliente set nome = (?), telefone = (?), cpf_cnpj = (?)" + " where id_cliente = (?)";
 		PreparedStatement statementUpdate = null;
-		
-		
-		
+
 		try {
 
 			connection = DB.getConnection();
@@ -210,7 +203,6 @@ public class ClienteDAO {
 			statementUpdate.setInt(4, cliente.getId_cliente());
 			statementUpdate.executeUpdate();
 			connection.commit(); // Confirmação para efetuar os comandos.
-			
 
 		} catch (Exception e) {
 			connection.rollback();
@@ -221,33 +213,31 @@ public class ClienteDAO {
 		}
 
 	}
-	
+
 	public void delete(Cliente cliente) throws SQLException {
-		
+
 		String sqlDeleteVeiculo = "DELETE FROM veiculo WHERE proprietario = (?);";
 		String sqlDeleteCliente = "DELETE FROM cliente WHERE id_cliente = (?);";
-		
+
 		PreparedStatement st1 = null;
 		PreparedStatement st2 = null;
-		
-		
+
 		try {
 			connection = DB.getConnection();
 			connection.setAutoCommit(false); // desativando o autocommit
 
 			st1 = connection.prepareStatement(sqlDeleteVeiculo);
 			st2 = connection.prepareStatement(sqlDeleteCliente);
-			
+
 			st1.setInt(1, cliente.getId_cliente());
 			st1.executeUpdate();
 			st2.setInt(1, cliente.getId_cliente());
 			st2.executeUpdate();
-			
-			
+
 			connection.commit(); // Confirmação para efetuar os comandos.
-			
+
 			System.out.println("Cliente deletado");
-	
+
 		} catch (Exception e) {
 			connection.rollback();
 			e.printStackTrace();
@@ -255,7 +245,7 @@ public class ClienteDAO {
 			DB.closeStatement(st1);
 			DB.closeConnection();
 		}
-		
+
 	}
 
 }
