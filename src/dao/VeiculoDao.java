@@ -137,4 +137,76 @@ public class VeiculoDao {
 		}
 	}
 	
+	public Veiculo findByPlaca(String placa) throws SQLException {
+		
+		String sqlbusca = "select * from veiculo where placa = (?)";
+		PreparedStatement st1 = null;
+		ResultSet rs1 = null;
+		
+		Veiculo veiculo = new Veiculo(); // guardar o veiculo que veio do banco
+		
+		try {
+			connection = DB.getConnection();
+			connection.setAutoCommit(false); // desativando o autocommit
+
+			st1 = connection.prepareStatement(sqlbusca);
+			st1.setString(1, placa); // buscando o veiculo com a placa passada como argumento
+
+			rs1 = st1.executeQuery(); // resultado da busca
+
+			while (rs1.next()) {
+				System.out.println("Id proprietario " + rs1.getString("proprietario"));
+				veiculo.setId_veiculo(rs1.getInt("id_veiculo"));
+				veiculo.setProprietario(rs1.getInt("proprietario"));
+				veiculo.setPlaca(rs1.getString("placa"));
+				veiculo.setFabricante(rs1.getString("fabricante"));
+				veiculo.setModelo(rs1.getString("modelo"));
+				veiculo.setTipo_veiculo(rs1.getString("tipo_veiculo"));
+			}
+
+		} catch (Exception e) {
+			connection.rollback();
+			e.printStackTrace();
+		} finally {
+			DB.closeResultSet(rs1);
+			DB.closeStatement(st1);
+		}
+		
+		return veiculo; // veiculo será usado para o metodo update abaixo
+		
+	}
+	
+	public void updateVeiculo(Veiculo veiculo) throws SQLException {
+		String sqlUpdate = "update veiculo set"
+						 +" placa = (?),"
+						 +" fabricante = (?)," 
+						 +" modelo = (?),"
+						 +" tipo_veiculo = (?)"
+						 +" where id_veiculo = (?)";
+		PreparedStatement statementUpdate = null;
+		
+		try {
+
+			connection = DB.getConnection();
+			connection.setAutoCommit(false); // desativando o autocommit
+			
+			statementUpdate = connection.prepareStatement(sqlUpdate);
+			statementUpdate.setString(1, veiculo.getPlaca());
+			statementUpdate.setString(2, veiculo.getFabricante());
+			statementUpdate.setString(3, veiculo.getModelo());
+			statementUpdate.setString(4, veiculo.getTipo_veiculo());
+			statementUpdate.setInt(5, veiculo.getId_veiculo());
+			statementUpdate.executeUpdate();
+			
+			connection.commit(); // Confirmação para efetuar os comandos.
+
+		} catch (Exception e) {
+			connection.rollback();
+			e.printStackTrace();
+		} finally {
+			DB.closeStatement(statementUpdate);
+			DB.closeConnection();
+		}
+	}
+	
 }

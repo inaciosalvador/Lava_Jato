@@ -1,16 +1,17 @@
 package application;
 
 import java.sql.SQLException;
+import java.util.Scanner;
 
-import dao.ClienteDAO;
 import dao.VeiculoDao;
+import entities.Veiculo;
 
 
 
 public class programa  {
 	public static void main(String[] args) throws SQLException {
 		
-		// Scanner teclado = new Scanner(System.in);
+		 Scanner teclado = new Scanner(System.in);
 
 		// cadastrar cliente
 		/*
@@ -70,8 +71,25 @@ public class programa  {
 		
 		// -------------------------------------------------------
 		
+							// update veiculo
 		
-
+		Veiculo veiculoMemoria = new Veiculo(); // recebe o cliente do banco
+		Veiculo veiculoAlterado = new Veiculo(); 
+		VeiculoDao v = new VeiculoDao();
+		
+		System.out.println("Insira a placa do carro: ");
+		String placa = teclado.nextLine();
+		
+		veiculoMemoria = v.findByPlaca(placa); 
+		// objeto de memoria recebe o veiculo do banco,
+		// que foi buscado atraves da placa
+		
+		veiculoAlterado = veiculoMemoria.update(veiculoMemoria);
+		// veiculo alterado recebeu o veiculo de memoria executando o update em memoria
+		
+		v.updateVeiculo(veiculoAlterado);
+		// executando o update no banco passando o novo veiculo.
+		
 	}
 
 }
