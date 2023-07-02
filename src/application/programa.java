@@ -49,10 +49,11 @@ public class programa  {
 		// deletar clientes
 
 		/*
-		 * Cliente c = new Cliente(); ClienteDAO cdao = new ClienteDAO();
+		 * Cliente c = new Cliente(); 
+		 * ClienteDAO cdao = new ClienteDAO();
 		 * 
-		 * System.out.println("Informe o Nº de documento: "); String doc =
-		 * teclado.nextLine();
+		 * System.out.println("Informe o Nº de documento: "); 
+		 * String doc = teclado.nextLine();
 		 * 
 		 * c = cdao.findByID(doc); // guarda o cliente que será apagado cdao.delete(c);
 		 */
@@ -72,7 +73,7 @@ public class programa  {
 		// -------------------------------------------------------
 		
 							// update veiculo
-		
+		/*
 		Veiculo veiculoMemoria = new Veiculo(); // recebe o cliente do banco
 		Veiculo veiculoAlterado = new Veiculo(); 
 		VeiculoDao v = new VeiculoDao();
@@ -89,7 +90,26 @@ public class programa  {
 		
 		v.updateVeiculo(veiculoAlterado);
 		// executando o update no banco passando o novo veiculo.
+		*/
+		 
+		 
+		// -------------------------------------------------------
 		
+		 				// delete Veiculo 
+		 /*
+		 Veiculo v = new Veiculo();
+		 VeiculoDao vdao = new VeiculoDao();
+		 
+		 System.out.println("Informe a placa do veiculo a ser deletado: ");
+		 String placaDelete = teclado.nextLine();
+		 
+		 v = vdao.findByPlaca(placaDelete);
+		 vdao.deleteVeiculo(v);
+		 */
+		 
+		 
+		 
+		 
 	}
 
 }
