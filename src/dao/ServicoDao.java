@@ -48,7 +48,7 @@ public class ServicoDao {
 	}
 
 	public void read() throws SQLException {
-		
+
 		String sqlServico = "select * from servico";
 
 		PreparedStatement st1 = null;
@@ -76,26 +76,87 @@ public class ServicoDao {
 			}
 
 			for (Servico servico : servicos) {
-					System.out.println("Id serviço: " + servico.getId_servico());
-					System.out.println("Descrição: " + servico.getDescricao());
-					System.out.println("Preço cadastrado: " + servico.getPreco());
-					System.out.println("-----------------------------------------");
+				System.out.println("Id serviço: " + servico.getId_servico());
+				System.out.println("Descrição: " + servico.getDescricao());
+				System.out.println("Preço cadastrado: " + servico.getPreco());
+				System.out.println("-----------------------------------------");
 			}
-			
+
 			connection.commit(); // Confirmação para efetuar os comandos.
 
 		} catch (Exception e) {
 			connection.rollback();
 			System.out.println("Não encontrado: ");
-			e.printStackTrace();		
+			e.printStackTrace();
 		} finally {
 			DB.closeResultSet(rs1);
 			DB.closeStatement(st1);
 			DB.closeConnection();
 		}
 	}
-	
-	public void update() {
+
+	public Servico findById(int id) throws SQLException {
+
+		String sqlBusca = "select * from servico where id_servico = (?)";
+		PreparedStatement st1 = null;
+		ResultSet rs1 = null;
+
+		Servico servico = new Servico();
+
+		try {
+
+			connection = DB.getConnection();
+			connection.setAutoCommit(false); // desativando o autocommit
+
+			st1 = connection.prepareStatement(sqlBusca);
+			st1.setInt(1, id); // buscando o veiculo com a placa passada como argumento
+			rs1 = st1.executeQuery(); // resultado da busca
+
+			while (rs1.next()) {
+				System.out.println("Id servico: " + rs1.getInt("id_servico"));
+				servico.setId_servico(rs1.getInt("id_servico"));
+				servico.setDescricao(rs1.getString("descricao"));
+				servico.setPreco(rs1.getDouble("preco"));
+			}
+
+			connection.commit(); // Confirmação para efetuar os comandos.
+
+		} catch (Exception e) {
+			connection.rollback();
+			e.printStackTrace();
+		} finally {
+			DB.closeResultSet(rs1);
+			DB.closeStatement(st1);
+		}
+
+		return servico;
+	}
+
+	public void updateServico(Servico servico) throws SQLException{
 		
+		String sqlUpdate = "update servico set descricao = (?), preco = (?) where id_servico = (?)";
+		
+		PreparedStatement statementUpdate = null;
+		
+		try {
+			
+			connection = DB.getConnection();
+			connection.setAutoCommit(false); // desativando o autocommit
+
+			statementUpdate = connection.prepareStatement(sqlUpdate);
+			statementUpdate.setString(1, servico.getDescricao());
+			statementUpdate.setDouble(2, servico.getPreco());
+			statementUpdate.setDouble(3, servico.getId_servico());
+			
+			statementUpdate.executeUpdate();
+			connection.commit(); // Confirmação para efetuar os comandos.
+			
+		} catch (Exception e) {
+			connection.rollback();
+			e.printStackTrace();
+		} finally {
+			DB.closeStatement(statementUpdate);
+			DB.closeConnection();
+		}
 	}
 }

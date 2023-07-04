@@ -62,5 +62,46 @@ public class Servico{
 		return novoServico;
 
 	}
+	
+	public Servico update(Servico servico) {
+		
+		int escolha;
+		int resposta = 1;
+		
+		while(resposta == 1) {
+			System.out.println("Quais dados deseja alterar? ");
+			System.out.println("1 - descrição");
+			System.out.println("2 - preço");
+			System.out.println(" ");
+			System.out.println("Escolha uma opção");
+			
+			escolha = teclado.nextInt();
+			teclado.nextLine();
+			
+			switch (escolha) {
+
+			case 1:
+				System.out.println("Informe a nova descrição: ");
+				String descricao = teclado.nextLine();
+				servico.setDescricao(descricao);
+				break;
+			case 2:
+				System.out.println("Informe o novo preço: (00,00) ");
+				double preco = teclado.nextDouble();
+				servico.setPreco(preco);
+				break;
+			default:
+				System.out.println("Escolha uma opção valida");
+			}
+
+			System.out.println("Deseja alterar mais algum dado? ");
+			System.out.println("1 - sim ");
+			System.out.println("2 - Não ");
+			resposta = teclado.nextInt();
+			teclado.nextLine();
+		}
+		
+		return servico;
+	}
 
 }

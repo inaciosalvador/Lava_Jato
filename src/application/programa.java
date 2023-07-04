@@ -5,6 +5,7 @@ import java.util.Scanner;
 
 import dao.ServicoDao;
 import dao.VeiculoDao;
+import entities.Servico;
 import entities.Veiculo;
 
 
@@ -117,9 +118,31 @@ public class programa  {
 		 
 		// -------------------------------------------------------
 		 				// read serviços
-		 
+		/* 
 		 ServicoDao s = new ServicoDao();
 		 s.read();
+		 */
+		// -------------------------------------------------------
+		 			// update servico
+		 
+		 Servico servicoMemoria = new Servico(); // recebe o servico do banco
+		 Servico ServicoAlterado = new Servico();
+		 ServicoDao s = new ServicoDao();
+		 
+		 System.out.println("Insira o codigo do serviço a ser alterado: ");
+		 int codigo = teclado.nextInt();
+		 
+		 servicoMemoria = s.findById(codigo); 
+		 // servicoMemoria recebe o servico escolhido
+		 // e enviará para a classe/entidade de alteração em memoria
+		 
+		 ServicoAlterado = servicoMemoria.update(servicoMemoria);
+		 // serviçoAlterado recebe o servico de memoria já modificado pela classe/entidade
+		 
+		 s.updateServico(ServicoAlterado);
+		 // executa a mudança no banco atualizando o novo serviço
+		 
+		 
 		 
 		 
 		 
