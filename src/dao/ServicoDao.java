@@ -132,14 +132,14 @@ public class ServicoDao {
 		return servico;
 	}
 
-	public void updateServico(Servico servico) throws SQLException{
-		
+	public void updateServico(Servico servico) throws SQLException {
+
 		String sqlUpdate = "update servico set descricao = (?), preco = (?) where id_servico = (?)";
-		
+
 		PreparedStatement statementUpdate = null;
-		
+
 		try {
-			
+
 			connection = DB.getConnection();
 			connection.setAutoCommit(false); // desativando o autocommit
 
@@ -147,10 +147,10 @@ public class ServicoDao {
 			statementUpdate.setString(1, servico.getDescricao());
 			statementUpdate.setDouble(2, servico.getPreco());
 			statementUpdate.setDouble(3, servico.getId_servico());
-			
+
 			statementUpdate.executeUpdate();
 			connection.commit(); // Confirmação para efetuar os comandos.
-			
+
 		} catch (Exception e) {
 			connection.rollback();
 			e.printStackTrace();
@@ -158,5 +158,32 @@ public class ServicoDao {
 			DB.closeStatement(statementUpdate);
 			DB.closeConnection();
 		}
+	}
+
+	public void deleteServico(Servico servico) throws SQLException {
+
+		String sqlDeleteServico = "delete from servico where id_servico = (?)";
+
+		PreparedStatement stServico = null;
+
+		try {
+			connection = DB.getConnection();
+			connection.setAutoCommit(false); // desativando o autocommit
+
+			stServico = connection.prepareStatement(sqlDeleteServico);
+			stServico.setInt(1, servico.getId_servico());
+			stServico.executeUpdate();
+
+			connection.commit(); // Confirmação para efetuar os comandos.
+			System.out.println("Serviço deletado com exito! ");
+			
+		} catch (Exception e) {
+			connection.rollback();
+			e.printStackTrace();
+		} finally {
+			DB.closeStatement(stServico);
+			DB.closeConnection();
+		}
+
 	}
 }

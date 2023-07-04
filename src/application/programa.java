@@ -124,7 +124,7 @@ public class programa  {
 		 */
 		// -------------------------------------------------------
 		 			// update servico
-		 
+		 /*
 		 Servico servicoMemoria = new Servico(); // recebe o servico do banco
 		 Servico ServicoAlterado = new Servico();
 		 ServicoDao s = new ServicoDao();
@@ -141,10 +141,21 @@ public class programa  {
 		 
 		 s.updateServico(ServicoAlterado);
 		 // executa a mudança no banco atualizando o novo serviço
-		 
-		 
-		 
-		 
+		  * */
+		  
+		 	 
+		// -------------------------------------------------------
+		  						//delete
+		  /*
+		  Servico s = new Servico();
+		  ServicoDao sDao = new ServicoDao();
+		  
+		  System.out.println("Informe o codigo do serviço a ser deletado: ");
+		  int idServico = teclado.nextInt();
+		  
+		  s = sDao.findById(idServico);
+		  sDao.deleteServico(s);
+		  */
 		 
 	}
 
