@@ -2,17 +2,20 @@ package dao;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 import db.DB;
 import entities.Servico;
 
 public class ServicoDao {
 
+	Connection connection = null;
+
 	public void create(Servico servico) throws SQLException {
 		String sql = "INSERT INTO servico (descricao, preco)" + " VALUES (?, ?)";
-
-		Connection connection = null;
 
 		try {
 			connection = DB.getConnection();
@@ -42,5 +45,57 @@ public class ServicoDao {
 				}
 			}
 		}
+	}
+
+	public void read() throws SQLException {
+		
+		String sqlServico = "select * from servico";
+
+		PreparedStatement st1 = null;
+		ResultSet rs1 = null;
+
+		try {
+			connection = DB.getConnection();
+			connection.setAutoCommit(false); // desativando o autocommit
+
+			st1 = connection.prepareStatement(sqlServico);
+			rs1 = st1.executeQuery();
+
+			List<Servico> servicos = new ArrayList<>(); // guardará todos os resultados do banco para ser impresso
+														// depois
+
+			while (rs1.next()) {
+				Servico servico = new Servico(); // guarda o objeto atual do loop
+
+				servico.setId_servico(rs1.getInt("id_servico"));
+				servico.setDescricao(rs1.getString("descricao"));
+				servico.setPreco(rs1.getDouble("preco"));
+
+				servicos.add(servico); // adiciona o objeto atual na lista a ser impressa no forech abaixo
+
+			}
+
+			for (Servico servico : servicos) {
+					System.out.println("Id serviço: " + servico.getId_servico());
+					System.out.println("Descrição: " + servico.getDescricao());
+					System.out.println("Preço cadastrado: " + servico.getPreco());
+					System.out.println("-----------------------------------------");
+			}
+			
+			connection.commit(); // Confirmação para efetuar os comandos.
+
+		} catch (Exception e) {
+			connection.rollback();
+			System.out.println("Não encontrado: ");
+			e.printStackTrace();		
+		} finally {
+			DB.closeResultSet(rs1);
+			DB.closeStatement(st1);
+			DB.closeConnection();
+		}
+	}
+	
+	public void update() {
+		
 	}
 }

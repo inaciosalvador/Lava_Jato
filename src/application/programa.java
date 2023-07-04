@@ -3,6 +3,7 @@ package application;
 import java.sql.SQLException;
 import java.util.Scanner;
 
+import dao.ServicoDao;
 import dao.VeiculoDao;
 import entities.Veiculo;
 
@@ -107,6 +108,18 @@ public class programa  {
 		 vdao.deleteVeiculo(v);
 		 */
 		 
+		// -------------------------------------------------------
+		 
+		 // cadastrar servico 
+		 
+		 
+		 
+		 
+		// -------------------------------------------------------
+		 				// read serviços
+		 
+		 ServicoDao s = new ServicoDao();
+		 s.read();
 		 
 		 
 		 
