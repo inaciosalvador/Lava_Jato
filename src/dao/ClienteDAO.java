@@ -150,7 +150,7 @@ public class ClienteDAO {
 		}
 	}
 
-	public Cliente findByDOC(String doc) throws SQLException {
+	public Cliente findByDoc(String doc) throws SQLException {
 
 		String sqlbusca = "select * from cliente where cpf_cnpj = (?)";
 		PreparedStatement st1 = null;

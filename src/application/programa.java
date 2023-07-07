@@ -1,10 +1,15 @@
 package application;
 
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
+import dao.ClienteDAO;
 import dao.ServicoDao;
 import dao.VeiculoDao;
+import entities.Cliente;
+import entities.OrdemServico;
 import entities.Servico;
 import entities.Veiculo;
 
@@ -156,6 +161,20 @@ public class programa  {
 		  s = sDao.findById(idServico);
 		  sDao.deleteServico(s);
 		  */
+		 
+		// -------------------------------------------------------
+		 
+		 			//gerar ordem de serviço
+		 
+		 OrdemServico o = new OrdemServico();
+		 OrdemServico o1 = new OrdemServico();
+		 
+		 o1 = o.gerarOrdem();
+		 
+		 System.out.println(o1);
+		 
+		 
+		 		 
 		 
 	}
 
