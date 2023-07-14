@@ -1,5 +1,7 @@
 package entities;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 public class Cliente {
@@ -10,6 +12,8 @@ public class Cliente {
 	private String nome;
 	private String telefone;
 	private String cpf_cnpj;
+	
+	List<Veiculo> veiculos = new ArrayList<>();
 
 	public Cliente() {
 	}
@@ -50,6 +54,14 @@ public class Cliente {
 
 	public void setCpf_cnpj(String cpf_cnpj) {
 		this.cpf_cnpj = cpf_cnpj;
+	}
+
+	public List<Veiculo> getVeiculos() {
+		return veiculos;
+	}
+
+	public void setVeiculos(List<Veiculo> veiculos) {
+		this.veiculos = veiculos;
 	}
 
 	@Override
@@ -122,6 +134,10 @@ public class Cliente {
 		
 		return cliente;
 
+	}
+	
+	public void adicionarVeiculo(Veiculo v) {
+		veiculos.add(v);
 	}
 
 }

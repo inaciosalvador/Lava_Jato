@@ -153,10 +153,17 @@ public class ClienteDAO {
 	public Cliente findByDoc(String doc) throws SQLException {
 
 		String sqlbusca = "select * from cliente where cpf_cnpj = (?)";
+		String sqlVeiculo = "select * from veiculo where proprietario = (?)";
+		
 		PreparedStatement st1 = null;
 		ResultSet rs1 = null;
+		
+		PreparedStatement st2 = null;
+		ResultSet rs2 = null;
 
+		
 		Cliente cliente = new Cliente();
+		List<Veiculo> v = new ArrayList<>();
 
 		try {
 			connection = DB.getConnection();
@@ -164,25 +171,45 @@ public class ClienteDAO {
 
 			st1 = connection.prepareStatement(sqlbusca);
 			st1.setString(1, doc); // buscando o cliente com o cpf passado como argumento
-
 			rs1 = st1.executeQuery(); // resultado da busca
+			
+			
 
+		
 			while (rs1.next()) {
+		
 				System.out.println("Cliente: " + rs1.getString("nome"));
 				cliente.setId_cliente(rs1.getInt("id_cliente"));
 				cliente.setNome(rs1.getString("nome"));
 				cliente.setTelefone(rs1.getString("telefone"));
 				cliente.setCpf_cnpj(rs1.getString("cpf_cnpj"));
 			}
-
+			
+			st2 = connection.prepareStatement(sqlVeiculo);
+			st2.setInt(1, cliente.getId_cliente()); // buscando o veiculo do cliente
+			rs2 = st2.executeQuery(); // resultado da busca	
+				
+				while(rs2.next()) {
+					Veiculo veiculos = new Veiculo();
+					veiculos.setId_veiculo(rs2.getInt("id_veiculo"));
+					veiculos.setProprietario(rs2.getInt("proprietario"));
+					veiculos.setPlaca(rs2.getString("placa"));
+					veiculos.setFabricante(rs2.getString("fabricante"));
+					veiculos.setModelo(rs2.getString("modelo"));
+					veiculos.setTipo_veiculo(rs2.getString("tipo_veiculo"));
+					v.add(veiculos);
+				}
+				
+				cliente.setVeiculos(v);
+			connection.commit(); // Confirmação para efetuar os comandos.
 		} catch (Exception e) {
 			connection.rollback();
 			e.printStackTrace();
 		} finally {
-			DB.closeResultSet(rs1);
-			DB.closeStatement(st1);
+			
 		}
-		return cliente; // cliente será usado para o metodo update
+		
+		return cliente; 
 	}
 
 	public void update(Cliente cliente) throws SQLException {
