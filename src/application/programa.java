@@ -154,8 +154,7 @@ public class programa {
 		Servico servs = new Servico();
 		Cliente c1 = new Cliente();
 		
-		System.out.println("Gerar ordem de serviço: ");
-		System.out.println("DOC: ");
+		System.out.println("Insira o numero de documento do cliente: ");
 		String doc = teclado.next();
 		
 		c1 = c.findByDoc(doc);
@@ -165,19 +164,11 @@ public class programa {
 			System.out.println("Placa: " + veiculo.getPlaca());
 		}	
 		
-		/*Até o momento o codigo funciona retornanando o cliente que agora contem 
-		 uma lista de veiculos associado a ele. 
-		 
-		 					** proximo passo**
-		 criar uma logica que solicite o codigo do serviço e associe a uma lista de serviço ou pedido
-		 
-		 Pensar em como ficará esse mepeamento associando as classes
-		 
-		 */
-		
 		List<Servico> pedido = new ArrayList<>();
 		int resp = 1;
-
+		
+		System.out.println("   ");
+		
 		while(resp == 1) {
 			System.out.println("Insira o codigo do pedido: ");	
 			int serv = teclado.nextInt();
@@ -201,34 +192,22 @@ public class programa {
 		
 		OrdemServico os = new OrdemServico(c1, observacao, pedido, valorTotal);
 		
-		System.out.println("                =====  ");
-		System.out.println("Ordem gerada");
+		System.out.println("========================================================");
+		System.out.println("             Ordem de Serviço");
 		System.out.println("Cliente: " + os.getId_cliente().getNome());
 		System.out.println("Serviços escolhidos: ");
 		
 		for(Servico ser : pedido) {
 			System.out.println(" ");
-			System.out.println(ser.getDescricao() + ": R$ " + ser.getPreco());
+			System.out.println(" * " + ser.getDescricao() + ": R$ " + ser.getPreco());
 		}
 		
 		System.out.println(os.getObservacao());
 		System.out.println(" ");
-		System.out.println("================================");
-		System.out.println("Valor total do Pedido: " + "R$ " +valorTotal);
-		System.out.print("================================");
-		
-		
-		/* ordem está sendo gerada normalmente, porem ainda falta alguns ajustes para melhorar a
-		 * qualidade do software.
-		 * 
-		 * Proximo passo, revisar os pontos fracos dessa implementação
-		 */
-		
-		
-		
-		
-		
-		
+		System.out.println("=======================================================");
+		System.out.println("Valor total do Pedido: " + "R$ " + valorTotal);
+		System.out.print("=========================================================");
+
 		
 		// -------------------------------------------------------
 	}
