@@ -1,4 +1,4 @@
-package entities;
+package model.entities;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -24,13 +24,12 @@ public class OrdemServico {
 	public OrdemServico() {		
 	}
 
-	public OrdemServico(Cliente id_cliente, String observacao,List<Servico> itens, Double valor_os) {
+	public OrdemServico(Cliente id_cliente, String observacao, List<Servico> servicos, Double valor_os) {
 		this.id_cliente = id_cliente;
 		this.observacao = observacao;
+		this.servico = servicos;
 		this.valor_os = valor_os;
 	}
-
-
 
 	public Integer getId_ordem() {
 		return id_ordem;
@@ -63,9 +62,11 @@ public class OrdemServico {
 	public void setValor_os(Double valor_os) {
 		this.valor_os = valor_os;
 	}
+	
+	public List<Servico> getServico() {
+		return servico;
+	}
 
-	
-	
 	@Override
 	public String toString() {
 		return "OrdemServico [id_ordem="
@@ -78,4 +79,6 @@ public class OrdemServico {
 				+ valor_os +
 				"]";
 	}
+	
+	
 }

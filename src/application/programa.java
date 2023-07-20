@@ -1,13 +1,19 @@
 package application;
 
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
+import org.w3c.dom.Text;
+
 import dao.ClienteDAO;
+import dao.ServicoDao;
 import dao.VeiculoDao;
-import entities.Cliente;
-import entities.Veiculo;
+import model.entities.Cliente;
+import model.entities.OrdemServico;
+import model.entities.Servico;
+import model.entities.Veiculo;
 
 public class programa {
 	public static void main(String[] args) throws SQLException {
@@ -144,8 +150,11 @@ public class programa {
 
 		ClienteDAO c = new ClienteDAO();
 		VeiculoDao v = new VeiculoDao();
+		ServicoDao s = new ServicoDao();
+		Servico servs = new Servico();
 		Cliente c1 = new Cliente();
 		
+		System.out.println("Gerar ordem de serviço: ");
 		System.out.println("DOC: ");
 		String doc = teclado.next();
 		
@@ -165,6 +174,61 @@ public class programa {
 		 Pensar em como ficará esse mepeamento associando as classes
 		 
 		 */
+		
+		List<Servico> pedido = new ArrayList<>();
+		int resp = 1;
+
+		while(resp == 1) {
+			System.out.println("Insira o codigo do pedido: ");	
+			int serv = teclado.nextInt();
+			servs = s.findById(serv);
+			pedido.add(servs);
+			
+			System.out.println("Deseja incluir outro serviço? ");
+			System.out.println("1 para sim");
+			System.out.println("2 para não");
+			resp = teclado.nextInt();
+		}
+		
+		System.out.println(" - Observações adicionais - ");
+		String observacao = teclado.nextLine();
+		
+		Double valorTotal = 0d ;
+		
+		for(Servico ss : pedido) {
+			valorTotal += ss.getPreco();
+		}
+		
+		OrdemServico os = new OrdemServico(c1, observacao, pedido, valorTotal);
+		
+		System.out.println("                =====  ");
+		System.out.println("Ordem gerada");
+		System.out.println("Cliente: " + os.getId_cliente().getNome());
+		System.out.println("Serviços escolhidos: ");
+		
+		for(Servico ser : pedido) {
+			System.out.println(" ");
+			System.out.println(ser.getDescricao() + ": R$ " + ser.getPreco());
+		}
+		
+		System.out.println(os.getObservacao());
+		System.out.println(" ");
+		System.out.println("================================");
+		System.out.println("Valor total do Pedido: " + "R$ " +valorTotal);
+		System.out.print("================================");
+		
+		
+		/* ordem está sendo gerada normalmente, porem ainda falta alguns ajustes para melhorar a
+		 * qualidade do software.
+		 * 
+		 * Proximo passo, revisar os pontos fracos dessa implementação
+		 */
+		
+		
+		
+		
+		
+		
 		
 		// -------------------------------------------------------
 	}

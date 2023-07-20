@@ -9,8 +9,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import db.DB;
-import entities.Cliente;
-import entities.Veiculo;
+import model.entities.Cliente;
+import model.entities.Veiculo;
 
 public class ClienteDAO {
 

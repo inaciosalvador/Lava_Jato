@@ -8,7 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import db.DB;
-import entities.Servico;
+import model.entities.Servico;
 
 public class ServicoDao {
 
