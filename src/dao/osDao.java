@@ -9,6 +9,7 @@ import java.time.format.DateTimeFormatter;
 
 import db.DB;
 import model.entities.OrdemServico;
+import model.entities.Servico;
 
 public class osDao {
 	
@@ -25,45 +26,46 @@ public class osDao {
 			connection = DB.getConnection();
 			connection.setAutoCommit(false); // desativando o autocommit
 
-			st1 = connection.prepareStatement(sql);
+			st1 = connection.prepareStatement(sql, PreparedStatement.RETURN_GENERATED_KEYS);
 			
 			st1.setInt(1, os.getId_cliente().getId_cliente()); 
 			st1.setString(2, os.getObservacao());
 			st1.setDouble(3, os.getValor_os());
-			rs1 = st1.executeQuery();
+			st1.executeUpdate();
 			
-			int idOrdem = rs1.getInt("id_ordem"); // guarda o id da ordem de serviço, gerado pelo banco.
 			
+			 ResultSet generatedKeys = st1.getGeneratedKeys();
+	            int idOrdem = 0;
+
+	            if (generatedKeys.next()) {
+	                idOrdem = generatedKeys.getInt(1);
+	            }
+  
 			st1 = connection.prepareStatement(sql2);
 			
 			DateTimeFormatter fmt = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
 			LocalDateTime data = LocalDateTime.now();
 			
 			java.sql.Timestamp time = java.sql.Timestamp.valueOf(data);
+
+			for(Servico s : os.getServico()) {
+				st1.setTimestamp(1, time); // data a ser armazenada
+				st1.setInt(2, s.getId_servico()); // id do serviço
+				st1.setInt(3, idOrdem); // id da ordem de serviço
+				st1.executeUpdate();
+			}		
 			
-			st1.setTimestamp(1, time);
-			st1.setInt(2, os.getId_ordem());
-			 // criar um loop para armazenar a lista de serviços
-			
-			
-			
-			
-			
-			
-			
-			
+			connection.commit();
+			os.setId_ordem(idOrdem); // entregando o id da ordem de serviço
 			
 		} catch (Exception e) {
 			connection.rollback();
 			System.out.println("Não encontrado: ");
 			e.printStackTrace();
-		}
-		
-		
-		
-		
+		} finally {
+            DB.closeResultSet(rs1);
+            DB.closeStatement(st1);
+            DB.closeConnection();
+        }
 	}
-	
-	
-
 }

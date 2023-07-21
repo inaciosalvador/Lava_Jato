@@ -10,6 +10,7 @@ import org.w3c.dom.Text;
 import dao.ClienteDAO;
 import dao.ServicoDao;
 import dao.VeiculoDao;
+import dao.osDao;
 import model.entities.Cliente;
 import model.entities.OrdemServico;
 import model.entities.Servico;
@@ -147,12 +148,15 @@ public class programa {
 		// -------------------------------------------------------
 
 		// gerar ordem de serviço
+		
+	
 
 		ClienteDAO c = new ClienteDAO();
 		VeiculoDao v = new VeiculoDao();
 		ServicoDao s = new ServicoDao();
 		Servico servs = new Servico();
 		Cliente c1 = new Cliente();
+		osDao gerarOrdem = new osDao();
 		
 		System.out.println("Insira o numero de documento do cliente: ");
 		String doc = teclado.next();
@@ -181,6 +185,9 @@ public class programa {
 			resp = teclado.nextInt();
 		}
 		
+		
+		teclado.nextLine(); // Consumir a quebra de linha pendente
+		
 		System.out.println(" - Observações adicionais - ");
 		String observacao = teclado.nextLine();
 		
@@ -191,23 +198,31 @@ public class programa {
 		}
 		
 		OrdemServico os = new OrdemServico(c1, observacao, pedido, valorTotal);
+		gerarOrdem.gerarOrdem(os);
 		
-		System.out.println("========================================================");
+		System.out.println("");
+		System.out.println("=======================================================");
 		System.out.println("             Ordem de Serviço");
-		System.out.println("Cliente: " + os.getId_cliente().getNome());
-		System.out.println("Serviços escolhidos: ");
+		System.out.println("=======================================================");
+		System.out.println("");
+		System.out.println("             Numero de Ordem: " + os.getId_ordem());
+		System.out.println("             Cliente: " + os.getId_cliente().getNome());
+		System.out.println("             Serviços escolhidos: ");
+		System.out.println(" ");
 		
 		for(Servico ser : pedido) {
-			System.out.println(" ");
 			System.out.println(" * " + ser.getDescricao() + ": R$ " + ser.getPreco());
 		}
 		
-		System.out.println(os.getObservacao());
 		System.out.println(" ");
+		
+		System.out.println("Observações adicionais: " + os.getObservacao());
 		System.out.println("=======================================================");
 		System.out.println("Valor total do Pedido: " + "R$ " + valorTotal);
-		System.out.print("=========================================================");
+		System.out.println("=======================================================");
+		
 
+		
 		
 		// -------------------------------------------------------
 	}
