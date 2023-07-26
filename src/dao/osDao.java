@@ -33,7 +33,6 @@ public class osDao {
 			st1.setDouble(3, os.getValor_os());
 			st1.executeUpdate();
 			
-			
 			 ResultSet generatedKeys = st1.getGeneratedKeys();
 	            int idOrdem = 0;
 

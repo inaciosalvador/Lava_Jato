@@ -149,7 +149,7 @@ public class programa {
 
 		// gerar ordem de serviço
 		
-	
+		/*
 
 		ClienteDAO c = new ClienteDAO();
 		VeiculoDao v = new VeiculoDao();
@@ -220,10 +220,55 @@ public class programa {
 		System.out.println("=======================================================");
 		System.out.println("Valor total do Pedido: " + "R$ " + valorTotal);
 		System.out.println("=======================================================");
-		
+		*/
 
-		
-		
 		// -------------------------------------------------------
+		
+		System.out.println("                  Bem vindo! ");
+		
+		System.out.println("Escolha uma opção: ");
+		System.out.println("1 - Clientes ");
+		System.out.println("2 - Veiculos ");
+		System.out.println("3 - Serviços ");
+		System.out.println("4 - Vendas ");
+		System.out.println("5 - Relatórios ");
+		System.out.println("6 - Sair ");
+
+		int esc = 0;
+		
+		switch (esc) {
+		case 1:
+			System.out.println("1 - Cadastrar Cliente");
+			System.out.println("2 - Listar Clientes ");
+			System.out.println("3 - Buscar Cliente ");
+			System.out.println("4 - Atualizar Cadastro ");
+			System.out.println("5 - Deletar Cliente ");
+			break;
+		case 2:
+			System.out.println("1 - Cadastrar Novo Veiculo ");
+			System.out.println("2 - Listar Veiculos ");
+			System.out.println("3 - Buscar Veiculo ");
+			System.out.println("4 - Atualizar Cadastro de Veiculo ");
+			System.out.println("5 - Deletar Veiculo ");
+			break;
+		case 3:
+			System.out.println("1 - Cadastrar Serviço");
+			System.out.println("2 - Listar Serviços ");
+			System.out.println("3 - Buscar Serviço ");
+			System.out.println("4 - Atualizar Cadastro de Serviço ");
+			System.out.println("5 - Deletar Serviço ");
+			break;	
+		case 4:
+			System.out.println("1 - Gerar Pedido ");
+		case 5:
+			System.out.println("1 - Consultar Venda ");
+			System.out.println("2 - Relatório de Vendas ");
+			break;		
+		default:
+			System.out.println("Insira uma opção valida! ");
+			break;
+		}
+		
+	
 	}
 }
