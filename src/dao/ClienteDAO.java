@@ -172,10 +172,7 @@ public class ClienteDAO {
 			st1 = connection.prepareStatement(sqlbusca);
 			st1.setString(1, doc); // buscando o cliente com o cpf passado como argumento
 			rs1 = st1.executeQuery(); // resultado da busca
-			
-			
-
-		
+	
 			while (rs1.next()) {
 		
 				System.out.println("Cliente: " + rs1.getString("nome"));
@@ -208,7 +205,6 @@ public class ClienteDAO {
 		} finally {
 			
 		}
-		
 		return cliente; 
 	}
 

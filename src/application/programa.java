@@ -22,32 +22,30 @@ public class programa {
 		Scanner teclado = new Scanner(System.in);
 
 		// cadastrar cliente
-		/*
-		 * Cliente c = new Cliente(); Veiculo v = new Veiculo(); ClienteDAO cdao = new
-		 * ClienteDAO();
-		 * 
-		 * c.create(); v.createVeiculo(); cdao.create(c, v);
-		 */
+		
+
+		 
 
 		// -------------------------------------------------------
 
 		// Listar todos os clientes
 
-		// ClienteDAO cdao = new ClienteDAO(); cdao.read();
+		// 
 
 		// -------------------------------------------------------
 
 		// editar clientes
 		/*
-		 * Cliente cliente = new Cliente(); // está recebendo o cliente do banco
-		 * ClienteDAO c = new ClienteDAO(); // usado para operar no banco Cliente
-		 * cliente1 = new Cliente(); // usado para atualizar o objeto na classe
-		 * 
-		 * System.out.println("Informe o Nº de documento: "); String doc =
-		 * teclado.nextLine();
-		 * 
-		 * cliente = c.findByID(doc); cliente1 = cliente.update(cliente); // contem o
-		 * objeto alterado c.update(cliente1);
+		  Cliente cliente = new Cliente(); // está recebendo o cliente do banco
+		  ClienteDAO c = new ClienteDAO(); // usado para operar no banco Cliente
+		  Cliente cliente1 = new Cliente(); // usado para atualizar o objeto na classe
+		  
+		  System.out.println("Informe o Nº de documento: "); String doc =
+		  teclado.nextLine();
+		  
+		  cliente = c.findByDoc(doc);
+		  cliente1 = cliente.update(cliente); 
+		  c.update(cliente1);
 		 */
 
 		// -------------------------------------------------------
@@ -119,19 +117,15 @@ public class programa {
 		// update servico
 		/*
 		 * Servico servicoMemoria = new Servico(); // recebe o servico do banco Servico
-		 * ServicoAlterado = new Servico(); ServicoDao s = new ServicoDao();
+		 * ServicoAlterado = new Servico(); 
+		 * ServicoDao s = new ServicoDao();
 		 * 
-		 * System.out.println("Insira o codigo do serviço a ser alterado: "); int codigo
-		 * = teclado.nextInt();
+		 * System.out.println("Insira o codigo do serviço a ser alterado: "); 
+		 * int codigo = teclado.nextInt();
 		 * 
-		 * servicoMemoria = s.findById(codigo); // servicoMemoria recebe o servico
-		 * escolhido // e enviará para a classe/entidade de alteração em memoria
-		 * 
-		 * ServicoAlterado = servicoMemoria.update(servicoMemoria); // serviçoAlterado
-		 * recebe o servico de memoria já modificado pela classe/entidade
-		 * 
-		 * s.updateServico(ServicoAlterado); // executa a mudança no banco atualizando o
-		 * novo serviço
+		 * servicoMemoria = s.findById(codigo); 
+		 * ServicoAlterado = servicoMemoria.update(servicoMemoria); 
+		 * s.updateServico(ServicoAlterado); 
 		 */
 
 		// -------------------------------------------------------
@@ -234,7 +228,7 @@ public class programa {
 		System.out.println("5 - Relatórios ");
 		System.out.println("6 - Sair ");
 
-		int esc = 0;
+		int esc = teclado.nextInt();
 		
 		switch (esc) {
 		case 1:
@@ -243,6 +237,69 @@ public class programa {
 			System.out.println("3 - Buscar Cliente ");
 			System.out.println("4 - Atualizar Cadastro ");
 			System.out.println("5 - Deletar Cliente ");
+			
+		int n1 = teclado.nextInt();
+			switch (n1) {
+			case 1: // Cadastro de clientes
+			    Cliente c1 = new Cliente(); 
+			    Veiculo v = new Veiculo(); 
+			    ClienteDAO cdao = new ClienteDAO();
+				c1.create(); v.createVeiculo(); cdao.create(c1, v);
+				break;
+			case 2:	// Listar todos os clientes 
+				ClienteDAO cldao = new ClienteDAO(); 
+				cldao.read();
+				break;
+			case 3:	// Buscar cliente
+				Cliente clienteB = new Cliente();
+				ClienteDAO cc = new ClienteDAO();
+				
+				System.out.println("Informe o Nº de documento: ");
+				String doc1 = teclado.nextLine();
+				clienteB = cc.findByDoc(doc1);
+				
+				System.out.println("Dados do Cliente: ");
+				System.out.println("Nome: " + clienteB.getNome());
+				System.out.println("Telefone: " + clienteB.getTelefone());
+				System.out.println("Documento: " + clienteB.getCpf_cnpj());
+				
+				for(Veiculo vv : clienteB.getVeiculos()) {
+					System.out.println(" - Veiculo - ");
+					System.out.println(vv.getPlaca());
+					System.out.println(vv.getModelo());
+				}
+				
+				System.out.println("            --        ");
+				break;	
+			case 4:	// Atualizar cadastro
+				System.out.println("  - Atualizar cadastro de cliente - ");
+				Cliente cliente2 = new Cliente(); // está recebendo o cliente do banco
+			    ClienteDAO c2 = new ClienteDAO(); // usado para operar no banco Cliente
+				Cliente cliente3 = new Cliente(); // usado para atualizar o objeto na classe
+				  
+				System.out.println("Informe o Nº de documento: "); 
+				String documento = teclado.nextLine();
+				  
+				cliente2 = c2.findByDoc(documento);
+				cliente3 = cliente2.update(cliente2); 
+				c2.update(cliente3);
+				break;	
+			case 5: // Deletar cliente
+				System.out.println(" - Deletar cliente - ");
+				
+				Cliente c4 = new Cliente(); 
+				ClienteDAO cdao1 = new ClienteDAO();
+				 
+				System.out.println("Informe o Nº de documento: "); 
+				String doc2 = teclado.nextLine();
+				
+				c4 = cdao1.findByDoc(doc2); // guarda o cliente que será apagado 
+				cdao1.delete(c4);
+				
+			default:
+				
+				break;
+			}
 			break;
 		case 2:
 			System.out.println("1 - Cadastrar Novo Veiculo ");
