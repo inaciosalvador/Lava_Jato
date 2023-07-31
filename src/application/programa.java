@@ -219,7 +219,6 @@ public class programa {
 			int esc = teclado.nextInt();
 
 			switch (esc) {
-// -------------------------------------------------------------------------
 			case 1:
 
 				int resposta0 = 0;
@@ -262,73 +261,139 @@ public class programa {
 							System.out.println("2 - Voltar ao menu ");
 							resposta1 = teclado.nextInt();
 						}
-
 						break;
-
 					case 3: // Buscar cliente
-						Cliente clienteB = new Cliente();
-						ClienteDAO cc = new ClienteDAO();
+						
+						int resposta2 = 1;
+						while (resposta2 == 1) {
+							
+							Cliente clienteB = new Cliente();
+							ClienteDAO cc = new ClienteDAO();
 
-						System.out.println("Informe o Nº de documento: ");
-						String doc1 = teclado.nextLine();
-						clienteB = cc.findByDoc(doc1);
+							System.out.println("Informe o Nº de documento: ");
+							String doc1 = teclado.nextLine();
+							clienteB = cc.findByDoc(doc1);
 
-						System.out.println("Dados do Cliente: ");
-						System.out.println("Nome: " + clienteB.getNome());
-						System.out.println("Telefone: " + clienteB.getTelefone());
-						System.out.println("Documento: " + clienteB.getCpf_cnpj());
+							System.out.println("Dados do Cliente: ");
+							System.out.println("Nome: " + clienteB.getNome());
+							System.out.println("Telefone: " + clienteB.getTelefone());
+							System.out.println("Documento: " + clienteB.getCpf_cnpj());
 
-						for (Veiculo vv : clienteB.getVeiculos()) {
-							System.out.println(" - Veiculo - ");
-							System.out.println(vv.getPlaca());
-							System.out.println(vv.getModelo());
+							for (Veiculo vv : clienteB.getVeiculos()) {
+								System.out.println(" - Veiculo - ");
+								System.out.println(vv.getPlaca());
+								System.out.println(vv.getModelo());
+							}
+
+							System.out.println("            --        ");
+							System.out.println("1 - Buscar outro cliente ");
+							System.out.println("2 - Voltar ao menu ");
+							resposta2 = teclado.nextInt();
 						}
-
-						System.out.println("            --        ");
 						break;
 					case 4: // Atualizar cadastro
-						System.out.println("  - Atualizar cadastro de cliente - ");
-						Cliente cliente2 = new Cliente(); // está recebendo o cliente do banco
-						ClienteDAO c2 = new ClienteDAO(); // usado para operar no banco Cliente
-						Cliente cliente3 = new Cliente(); // usado para atualizar o objeto na classe
+						
+						int resposta4 = 1;
+						while(resposta4 == 1) {
+							System.out.println("  - Atualizar cadastro de cliente - ");
+							Cliente cliente2 = new Cliente(); // está recebendo o cliente do banco
+							ClienteDAO c2 = new ClienteDAO(); // usado para operar no banco Cliente
+							Cliente cliente3 = new Cliente(); // usado para atualizar o objeto na classe
 
-						System.out.println("Informe o Nº de documento: ");
-						String documento = teclado.nextLine();
+							System.out.println("Informe o Nº de documento: ");
+							String documento = teclado.nextLine();
 
-						cliente2 = c2.findByDoc(documento);
-						cliente3 = cliente2.update(cliente2);
-						c2.update(cliente3);
+							cliente2 = c2.findByDoc(documento);
+							cliente3 = cliente2.update(cliente2);
+							c2.update(cliente3);
+							
+							System.out.println("1 - Atualizar outro cliente ");
+							System.out.println("2 - Voltar ao menu ");
+							resposta4 = teclado.nextInt();
+						}
 						break;
 					case 5: // Deletar cliente
-						System.out.println(" - Deletar cliente - ");
+						
+						int resposta5 = 1;
+						while(resposta5 == 1) {
+							System.out.println(" - Deletar cliente - ");
 
-						Cliente c4 = new Cliente();
-						ClienteDAO cdao1 = new ClienteDAO();
+							Cliente c4 = new Cliente();
+							ClienteDAO cdao1 = new ClienteDAO();
 
-						System.out.println("Informe o Nº de documento: ");
-						String doc2 = teclado.nextLine();
+							System.out.println("Informe o Nº de documento: ");
+							String doc2 = teclado.nextLine();
 
-						c4 = cdao1.findByDoc(doc2); // guarda o cliente que será apagado
-						cdao1.delete(c4);
+							c4 = cdao1.findByDoc(doc2); // guarda o cliente que será apagado
+							cdao1.delete(c4);
+							
+							System.out.println("1 - Deletar outro cliente ");
+							System.out.println("2 - Voltar ao menu ");
+							resposta5 = teclado.nextInt();
+						}
 						break;
 					case 6:
-						resposta0 = 6;
 						break;
 					default:
 						System.out.println("Insira uma opção valida");
 					}
-
 				}
-
 				break;
-
-// -------------------------------------------------------------------------
 			case 2:
-				System.out.println("1 - Cadastrar Novo Veiculo ");
-				System.out.println("2 - Listar Veiculos ");
-				System.out.println("3 - Buscar Veiculo ");
-				System.out.println("4 - Atualizar Cadastro de Veiculo ");
-				System.out.println("5 - Deletar Veiculo ");
+	
+				int resposta1 = 0;
+				while(resposta1 != 6 ) {
+					System.out.println("1 - Cadastrar Novo Veiculo ");
+					System.out.println("2 - Listar Veiculos ");
+					System.out.println("3 - Buscar Veiculo ");
+					System.out.println("4 - Atualizar Cadastro de Veiculo ");
+					System.out.println("5 - Deletar Veiculo ");
+					System.out.println("6 - Sair");
+					resposta1 = teclado.nextInt();
+					
+					switch(resposta1) {
+					case 1: // Cadastrar novo veiculo
+						
+						int resposta2 = 1;
+						while(resposta2 == 1) {
+							Scanner tec = new Scanner(System.in);
+							Veiculo veiculo = new Veiculo();
+							VeiculoDao vDao = new VeiculoDao();
+							
+							System.out.println("Insira o numero de documento do cliente: ");
+							String doc = tec.nextLine();
+							
+							vDao.addNewVeiculo(doc, veiculo.createVeiculo());
+							System.out.println(" ");
+							
+							System.out.println("1 - Cadastrar outro veiculo ");
+							System.out.println("2 - Voltar ao menu ");
+							resposta2 = teclado.nextInt();
+						}
+						break;
+					case 2: // Listar todos os veiculos
+						
+						int resposta3 = 1;
+						while(resposta3 == 1) {
+							VeiculoDao v = new VeiculoDao(); 
+							v.read();
+							
+							System.out.println("1 - Recarregar a lista ");
+							System.out.println("2 - Voltar ao menu ");
+							resposta3 = teclado.nextInt();
+						}				
+						break;
+					case 3:
+						// implementar deste em diante
+						break;
+					case 4:
+						break;
+					case 5: 
+						break;
+					case 6: 
+						break;
+					}
+				}
 				break;
 			case 3:
 				System.out.println("1 - Cadastrar Serviço");

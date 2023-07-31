@@ -52,13 +52,6 @@ public class VeiculoDao {
 			System.out.println("Erro ao cadastrar veiculo: " + e.getMessage());
 
 		} finally {
-			if (connection != null) {
-				try {
-					connection.close();
-				} catch (SQLException e) {
-					e.printStackTrace();
-				}
-			}
 		}
 
 	}
@@ -124,11 +117,6 @@ public class VeiculoDao {
 			connection.rollback();
 			e.printStackTrace();
 		} finally {
-			DB.closeResultSet(rs1);
-			DB.closeStatement(st1);
-			DB.closeResultSet(rs2);
-			DB.closeStatement(st2);
-			DB.closeConnection();
 		}
 	}
 
