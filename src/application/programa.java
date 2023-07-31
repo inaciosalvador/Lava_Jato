@@ -22,30 +22,26 @@ public class programa {
 		Scanner teclado = new Scanner(System.in);
 
 		// cadastrar cliente
-		
-
-		 
 
 		// -------------------------------------------------------
 
 		// Listar todos os clientes
 
-		// 
+		//
 
 		// -------------------------------------------------------
 
 		// editar clientes
 		/*
-		  Cliente cliente = new Cliente(); // está recebendo o cliente do banco
-		  ClienteDAO c = new ClienteDAO(); // usado para operar no banco Cliente
-		  Cliente cliente1 = new Cliente(); // usado para atualizar o objeto na classe
-		  
-		  System.out.println("Informe o Nº de documento: "); String doc =
-		  teclado.nextLine();
-		  
-		  cliente = c.findByDoc(doc);
-		  cliente1 = cliente.update(cliente); 
-		  c.update(cliente1);
+		 * Cliente cliente = new Cliente(); // está recebendo o cliente do banco
+		 * ClienteDAO c = new ClienteDAO(); // usado para operar no banco Cliente
+		 * Cliente cliente1 = new Cliente(); // usado para atualizar o objeto na classe
+		 * 
+		 * System.out.println("Informe o Nº de documento: "); String doc =
+		 * teclado.nextLine();
+		 * 
+		 * cliente = c.findByDoc(doc); cliente1 = cliente.update(cliente);
+		 * c.update(cliente1);
 		 */
 
 		// -------------------------------------------------------
@@ -117,15 +113,13 @@ public class programa {
 		// update servico
 		/*
 		 * Servico servicoMemoria = new Servico(); // recebe o servico do banco Servico
-		 * ServicoAlterado = new Servico(); 
-		 * ServicoDao s = new ServicoDao();
+		 * ServicoAlterado = new Servico(); ServicoDao s = new ServicoDao();
 		 * 
-		 * System.out.println("Insira o codigo do serviço a ser alterado: "); 
-		 * int codigo = teclado.nextInt();
+		 * System.out.println("Insira o codigo do serviço a ser alterado: "); int codigo
+		 * = teclado.nextInt();
 		 * 
-		 * servicoMemoria = s.findById(codigo); 
-		 * ServicoAlterado = servicoMemoria.update(servicoMemoria); 
-		 * s.updateServico(ServicoAlterado); 
+		 * servicoMemoria = s.findById(codigo); ServicoAlterado =
+		 * servicoMemoria.update(servicoMemoria); s.updateServico(ServicoAlterado);
 		 */
 
 		// -------------------------------------------------------
@@ -142,190 +136,214 @@ public class programa {
 		// -------------------------------------------------------
 
 		// gerar ordem de serviço
-		
-		/*
 
-		ClienteDAO c = new ClienteDAO();
-		VeiculoDao v = new VeiculoDao();
-		ServicoDao s = new ServicoDao();
-		Servico servs = new Servico();
-		Cliente c1 = new Cliente();
-		osDao gerarOrdem = new osDao();
-		
-		System.out.println("Insira o numero de documento do cliente: ");
-		String doc = teclado.next();
-		
-		c1 = c.findByDoc(doc);
-		
-		
-		for (Veiculo veiculo : c1.getVeiculos()) {
-			System.out.println("Placa: " + veiculo.getPlaca());
-		}	
-		
-		List<Servico> pedido = new ArrayList<>();
-		int resp = 1;
-		
-		System.out.println("   ");
-		
-		while(resp == 1) {
-			System.out.println("Insira o codigo do pedido: ");	
-			int serv = teclado.nextInt();
-			servs = s.findById(serv);
-			pedido.add(servs);
-			
-			System.out.println("Deseja incluir outro serviço? ");
-			System.out.println("1 para sim");
-			System.out.println("2 para não");
-			resp = teclado.nextInt();
-		}
-		
-		
-		teclado.nextLine(); // Consumir a quebra de linha pendente
-		
-		System.out.println(" - Observações adicionais - ");
-		String observacao = teclado.nextLine();
-		
-		Double valorTotal = 0d ;
-		
-		for(Servico ss : pedido) {
-			valorTotal += ss.getPreco();
-		}
-		
-		OrdemServico os = new OrdemServico(c1, observacao, pedido, valorTotal);
-		gerarOrdem.gerarOrdem(os);
-		
-		System.out.println("");
-		System.out.println("=======================================================");
-		System.out.println("             Ordem de Serviço");
-		System.out.println("=======================================================");
-		System.out.println("");
-		System.out.println("             Numero de Ordem: " + os.getId_ordem());
-		System.out.println("             Cliente: " + os.getId_cliente().getNome());
-		System.out.println("             Serviços escolhidos: ");
-		System.out.println(" ");
-		
-		for(Servico ser : pedido) {
-			System.out.println(" * " + ser.getDescricao() + ": R$ " + ser.getPreco());
-		}
-		
-		System.out.println(" ");
-		
-		System.out.println("Observações adicionais: " + os.getObservacao());
-		System.out.println("=======================================================");
-		System.out.println("Valor total do Pedido: " + "R$ " + valorTotal);
-		System.out.println("=======================================================");
-		*/
+		/*
+		 * 
+		 * ClienteDAO c = new ClienteDAO(); VeiculoDao v = new VeiculoDao(); ServicoDao
+		 * s = new ServicoDao(); Servico servs = new Servico(); Cliente c1 = new
+		 * Cliente(); osDao gerarOrdem = new osDao();
+		 * 
+		 * System.out.println("Insira o numero de documento do cliente: "); String doc =
+		 * teclado.next();
+		 * 
+		 * c1 = c.findByDoc(doc);
+		 * 
+		 * 
+		 * for (Veiculo veiculo : c1.getVeiculos()) { System.out.println("Placa: " +
+		 * veiculo.getPlaca()); }
+		 * 
+		 * List<Servico> pedido = new ArrayList<>(); int resp = 1;
+		 * 
+		 * System.out.println("   ");
+		 * 
+		 * while(resp == 1) { System.out.println("Insira o codigo do pedido: "); int
+		 * serv = teclado.nextInt(); servs = s.findById(serv); pedido.add(servs);
+		 * 
+		 * System.out.println("Deseja incluir outro serviço? ");
+		 * System.out.println("1 para sim"); System.out.println("2 para não"); resp =
+		 * teclado.nextInt(); }
+		 * 
+		 * 
+		 * teclado.nextLine(); // Consumir a quebra de linha pendente
+		 * 
+		 * System.out.println(" - Observações adicionais - "); String observacao =
+		 * teclado.nextLine();
+		 * 
+		 * Double valorTotal = 0d ;
+		 * 
+		 * for(Servico ss : pedido) { valorTotal += ss.getPreco(); }
+		 * 
+		 * OrdemServico os = new OrdemServico(c1, observacao, pedido, valorTotal);
+		 * gerarOrdem.gerarOrdem(os);
+		 * 
+		 * System.out.println("");
+		 * System.out.println("=======================================================")
+		 * ; System.out.println("             Ordem de Serviço");
+		 * System.out.println("=======================================================")
+		 * ; System.out.println(""); System.out.println("             Numero de Ordem: "
+		 * + os.getId_ordem()); System.out.println("             Cliente: " +
+		 * os.getId_cliente().getNome());
+		 * System.out.println("             Serviços escolhidos: ");
+		 * System.out.println(" ");
+		 * 
+		 * for(Servico ser : pedido) { System.out.println(" * " + ser.getDescricao() +
+		 * ": R$ " + ser.getPreco()); }
+		 * 
+		 * System.out.println(" ");
+		 * 
+		 * System.out.println("Observações adicionais: " + os.getObservacao());
+		 * System.out.println("=======================================================")
+		 * ; System.out.println("Valor total do Pedido: " + "R$ " + valorTotal);
+		 * System.out.println("=======================================================")
+		 * ;
+		 */
 
 		// -------------------------------------------------------
-		
-		System.out.println("                  Bem vindo! ");
-		
-		System.out.println("Escolha uma opção: ");
-		System.out.println("1 - Clientes ");
-		System.out.println("2 - Veiculos ");
-		System.out.println("3 - Serviços ");
-		System.out.println("4 - Vendas ");
-		System.out.println("5 - Relatórios ");
-		System.out.println("6 - Sair ");
 
-		int esc = teclado.nextInt();
-		
-		switch (esc) {
-		case 1:
-			System.out.println("1 - Cadastrar Cliente");
-			System.out.println("2 - Listar Clientes ");
-			System.out.println("3 - Buscar Cliente ");
-			System.out.println("4 - Atualizar Cadastro ");
-			System.out.println("5 - Deletar Cliente ");
-			
-		int n1 = teclado.nextInt();
-			switch (n1) {
-			case 1: // Cadastro de clientes
-			    Cliente c1 = new Cliente(); 
-			    Veiculo v = new Veiculo(); 
-			    ClienteDAO cdao = new ClienteDAO();
-				c1.create(); v.createVeiculo(); cdao.create(c1, v);
-				break;
-			case 2:	// Listar todos os clientes 
-				ClienteDAO cldao = new ClienteDAO(); 
-				cldao.read();
-				break;
-			case 3:	// Buscar cliente
-				Cliente clienteB = new Cliente();
-				ClienteDAO cc = new ClienteDAO();
-				
-				System.out.println("Informe o Nº de documento: ");
-				String doc1 = teclado.nextLine();
-				clienteB = cc.findByDoc(doc1);
-				
-				System.out.println("Dados do Cliente: ");
-				System.out.println("Nome: " + clienteB.getNome());
-				System.out.println("Telefone: " + clienteB.getTelefone());
-				System.out.println("Documento: " + clienteB.getCpf_cnpj());
-				
-				for(Veiculo vv : clienteB.getVeiculos()) {
-					System.out.println(" - Veiculo - ");
-					System.out.println(vv.getPlaca());
-					System.out.println(vv.getModelo());
+		int respostaPrincipal = 1;
+
+		while (respostaPrincipal == 1) {
+
+			System.out.println("                  Bem vindo! ");
+			System.out.println("=============================================");
+
+			System.out.println("Escolha uma sessão: ");
+			System.out.println(" ");
+			System.out.println("1 - Clientes ");
+			System.out.println("2 - Veiculos ");
+			System.out.println("3 - Serviços ");
+			System.out.println("4 - Vendas ");
+			System.out.println("5 - Relatórios ");
+			System.out.println("6 - Sair ");
+
+			int esc = teclado.nextInt();
+
+			switch (esc) {
+			case 1:
+
+				int resposta0 = 1;
+				while (resposta0 != 6) {
+					System.out.println("1 - Cadastrar Cliente");
+					System.out.println("2 - Listar Clientes ");
+					System.out.println("3 - Buscar Cliente ");
+					System.out.println("4 - Atualizar Cadastro ");
+					System.out.println("5 - Deletar Cliente ");
+					System.out.println("6 - Sair");
+
+					resposta0 = teclado.nextInt();
+
+					switch (resposta0) {
+					case 1: // Cadastro de clientes
+
+						int resposta = 1;
+						while (resposta == 1) {
+							Cliente c1 = new Cliente();
+							Veiculo v = new Veiculo();
+							ClienteDAO cdao = new ClienteDAO();
+							c1.create();
+							v.createVeiculo();
+							cdao.create(c1, v);
+							System.out.println(" ------------------------");
+							System.out.println("1 - Fazer novo cadastro ");
+							System.out.println("2 - Voltar ao menu ");
+							resposta = teclado.nextInt();
+						}
+
+						break;
+
+					case 2: // Listar todos os clientes
+
+						int resposta1 = 1;
+						while (resposta1 == 1) {
+							ClienteDAO cldao = new ClienteDAO();
+							cldao.read();
+							System.out.println(" ------------------------");
+							System.out.println("1 - Recarregar a lista ");
+							System.out.println("2 - Voltar ao menu ");
+							resposta1 = teclado.nextInt();
+						}
+
+						break;
+
+					case 3: // Buscar cliente
+						Cliente clienteB = new Cliente();
+						ClienteDAO cc = new ClienteDAO();
+
+						System.out.println("Informe o Nº de documento: ");
+						String doc1 = teclado.nextLine();
+						clienteB = cc.findByDoc(doc1);
+
+						System.out.println("Dados do Cliente: ");
+						System.out.println("Nome: " + clienteB.getNome());
+						System.out.println("Telefone: " + clienteB.getTelefone());
+						System.out.println("Documento: " + clienteB.getCpf_cnpj());
+
+						for (Veiculo vv : clienteB.getVeiculos()) {
+							System.out.println(" - Veiculo - ");
+							System.out.println(vv.getPlaca());
+							System.out.println(vv.getModelo());
+						}
+
+						System.out.println("            --        ");
+						break;
+					case 4: // Atualizar cadastro
+						System.out.println("  - Atualizar cadastro de cliente - ");
+						Cliente cliente2 = new Cliente(); // está recebendo o cliente do banco
+						ClienteDAO c2 = new ClienteDAO(); // usado para operar no banco Cliente
+						Cliente cliente3 = new Cliente(); // usado para atualizar o objeto na classe
+
+						System.out.println("Informe o Nº de documento: ");
+						String documento = teclado.nextLine();
+
+						cliente2 = c2.findByDoc(documento);
+						cliente3 = cliente2.update(cliente2);
+						c2.update(cliente3);
+						break;
+					case 5: // Deletar cliente
+						System.out.println(" - Deletar cliente - ");
+
+						Cliente c4 = new Cliente();
+						ClienteDAO cdao1 = new ClienteDAO();
+
+						System.out.println("Informe o Nº de documento: ");
+						String doc2 = teclado.nextLine();
+
+						c4 = cdao1.findByDoc(doc2); // guarda o cliente que será apagado
+						cdao1.delete(c4);
+						break;
+					default:
+
+						break;
+					}
+					
 				}
-				
-				System.out.println("            --        ");
-				break;	
-			case 4:	// Atualizar cadastro
-				System.out.println("  - Atualizar cadastro de cliente - ");
-				Cliente cliente2 = new Cliente(); // está recebendo o cliente do banco
-			    ClienteDAO c2 = new ClienteDAO(); // usado para operar no banco Cliente
-				Cliente cliente3 = new Cliente(); // usado para atualizar o objeto na classe
-				  
-				System.out.println("Informe o Nº de documento: "); 
-				String documento = teclado.nextLine();
-				  
-				cliente2 = c2.findByDoc(documento);
-				cliente3 = cliente2.update(cliente2); 
-				c2.update(cliente3);
-				break;	
-			case 5: // Deletar cliente
-				System.out.println(" - Deletar cliente - ");
-				
-				Cliente c4 = new Cliente(); 
-				ClienteDAO cdao1 = new ClienteDAO();
-				 
-				System.out.println("Informe o Nº de documento: "); 
-				String doc2 = teclado.nextLine();
-				
-				c4 = cdao1.findByDoc(doc2); // guarda o cliente que será apagado 
-				cdao1.delete(c4);
-				
+
+				break;
+			case 2:
+				System.out.println("1 - Cadastrar Novo Veiculo ");
+				System.out.println("2 - Listar Veiculos ");
+				System.out.println("3 - Buscar Veiculo ");
+				System.out.println("4 - Atualizar Cadastro de Veiculo ");
+				System.out.println("5 - Deletar Veiculo ");
+				break;
+			case 3:
+				System.out.println("1 - Cadastrar Serviço");
+				System.out.println("2 - Listar Serviços ");
+				System.out.println("3 - Buscar Serviço ");
+				System.out.println("4 - Atualizar Cadastro de Serviço ");
+				System.out.println("5 - Deletar Serviço ");
+				break;
+			case 4:
+				System.out.println("1 - Gerar Pedido ");
+			case 5:
+				System.out.println("1 - Consultar Venda ");
+				System.out.println("2 - Relatório de Vendas ");
+				break;
 			default:
-				
+				System.out.println("Insira uma opção valida! ");
 				break;
 			}
-			break;
-		case 2:
-			System.out.println("1 - Cadastrar Novo Veiculo ");
-			System.out.println("2 - Listar Veiculos ");
-			System.out.println("3 - Buscar Veiculo ");
-			System.out.println("4 - Atualizar Cadastro de Veiculo ");
-			System.out.println("5 - Deletar Veiculo ");
-			break;
-		case 3:
-			System.out.println("1 - Cadastrar Serviço");
-			System.out.println("2 - Listar Serviços ");
-			System.out.println("3 - Buscar Serviço ");
-			System.out.println("4 - Atualizar Cadastro de Serviço ");
-			System.out.println("5 - Deletar Serviço ");
-			break;	
-		case 4:
-			System.out.println("1 - Gerar Pedido ");
-		case 5:
-			System.out.println("1 - Consultar Venda ");
-			System.out.println("2 - Relatório de Vendas ");
-			break;		
-		default:
-			System.out.println("Insira uma opção valida! ");
-			break;
 		}
-		
-	
+
 	}
 }

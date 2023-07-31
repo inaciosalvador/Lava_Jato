@@ -64,15 +64,14 @@ public class ClienteDAO {
 
 		} finally {
 
-			if (connection != null) {
+		/* if (connection != null) {
 				try {
-
 					connection.close(); // Conexão fechada
-
 				} catch (SQLException e) {
 					e.printStackTrace();
 				}
 			}
+			*/
 		}
 
 	}
@@ -114,24 +113,24 @@ public class ClienteDAO {
 			System.out.println("");
 
 			while (rs1.next()) {
-
+				
+				System.out.println("------------------------------------------");
 				System.out.println("Id Cliente: " + rs1.getInt("id_cliente"));
 				System.out.println("Nome: " + rs1.getString("nome"));
 				System.out.println("Telefone: " + rs1.getString("telefone"));
 				System.out.println("Numero de Documento: " + rs1.getString("cpf_cnpj"));
-
-				System.out.println("             ---            ");
 
 				int countVeiculo = 1;
 
 				for (Veiculo veiculo : veiculos) {
 
 					if (veiculo.getProprietario() == rs1.getInt("id_cliente")) {
-						System.out.println("Veiculo: " + countVeiculo);
+						System.out.println(" ");
+						System.out.println("          Veiculo: " + countVeiculo);
+						System.out.println(" ");
 						System.out.println("Modelo: " + veiculo.getModelo());
 						System.out.println("Placa: " + veiculo.getPlaca());
 						countVeiculo++;
-						System.out.println("      -      ");
 					}
 				}
 			}
@@ -142,11 +141,6 @@ public class ClienteDAO {
 			connection.rollback();
 			e.printStackTrace();
 		} finally {
-			DB.closeResultSet(rs1);
-			DB.closeStatement(st1);
-			DB.closeResultSet(rs2);
-			DB.closeStatement(st2);
-			DB.closeConnection();
 		}
 	}
 
