@@ -202,7 +202,7 @@ public class programa {
 
 		int respostaPrincipal = 1;
 
-		while (respostaPrincipal == 1) {
+		while (respostaPrincipal != 6) {
 
 			System.out.println("                  Bem vindo! ");
 			System.out.println("=============================================");
@@ -219,9 +219,10 @@ public class programa {
 			int esc = teclado.nextInt();
 
 			switch (esc) {
+// -------------------------------------------------------------------------
 			case 1:
 
-				int resposta0 = 1;
+				int resposta0 = 0;
 				while (resposta0 != 6) {
 					System.out.println("1 - Cadastrar Cliente");
 					System.out.println("2 - Listar Clientes ");
@@ -229,7 +230,6 @@ public class programa {
 					System.out.println("4 - Atualizar Cadastro ");
 					System.out.println("5 - Deletar Cliente ");
 					System.out.println("6 - Sair");
-
 					resposta0 = teclado.nextInt();
 
 					switch (resposta0) {
@@ -257,7 +257,7 @@ public class programa {
 						while (resposta1 == 1) {
 							ClienteDAO cldao = new ClienteDAO();
 							cldao.read();
-							System.out.println(" ------------------------");
+							System.out.println("------------------------------------------");
 							System.out.println("1 - Recarregar a lista ");
 							System.out.println("2 - Voltar ao menu ");
 							resposta1 = teclado.nextInt();
@@ -311,14 +311,18 @@ public class programa {
 						c4 = cdao1.findByDoc(doc2); // guarda o cliente que será apagado
 						cdao1.delete(c4);
 						break;
-					default:
-
+					case 6:
+						resposta0 = 6;
 						break;
+					default:
+						System.out.println("Insira uma opção valida");
 					}
-					
+
 				}
 
 				break;
+
+// -------------------------------------------------------------------------
 			case 2:
 				System.out.println("1 - Cadastrar Novo Veiculo ");
 				System.out.println("2 - Listar Veiculos ");
@@ -343,6 +347,7 @@ public class programa {
 				System.out.println("Insira uma opção valida! ");
 				break;
 			}
+
 		}
 
 	}
