@@ -219,7 +219,7 @@ public class programa {
 			int esc = teclado.nextInt();
 
 			switch (esc) {
-			case 1:
+			case 1: // SESSÃO CLIENTES
 
 				int resposta0 = 0;
 				while (resposta0 != 6) {
@@ -263,10 +263,10 @@ public class programa {
 						}
 						break;
 					case 3: // Buscar cliente
-						
+
 						int resposta2 = 1;
 						while (resposta2 == 1) {
-							
+
 							Cliente clienteB = new Cliente();
 							ClienteDAO cc = new ClienteDAO();
 
@@ -292,9 +292,9 @@ public class programa {
 						}
 						break;
 					case 4: // Atualizar cadastro
-						
+
 						int resposta4 = 1;
-						while(resposta4 == 1) {
+						while (resposta4 == 1) {
 							System.out.println("  - Atualizar cadastro de cliente - ");
 							Cliente cliente2 = new Cliente(); // está recebendo o cliente do banco
 							ClienteDAO c2 = new ClienteDAO(); // usado para operar no banco Cliente
@@ -306,16 +306,16 @@ public class programa {
 							cliente2 = c2.findByDoc(documento);
 							cliente3 = cliente2.update(cliente2);
 							c2.update(cliente3);
-							
+
 							System.out.println("1 - Atualizar outro cliente ");
 							System.out.println("2 - Voltar ao menu ");
 							resposta4 = teclado.nextInt();
 						}
 						break;
 					case 5: // Deletar cliente
-						
+
 						int resposta5 = 1;
-						while(resposta5 == 1) {
+						while (resposta5 == 1) {
 							System.out.println(" - Deletar cliente - ");
 
 							Cliente c4 = new Cliente();
@@ -326,7 +326,7 @@ public class programa {
 
 							c4 = cdao1.findByDoc(doc2); // guarda o cliente que será apagado
 							cdao1.delete(c4);
-							
+
 							System.out.println("1 - Deletar outro cliente ");
 							System.out.println("2 - Voltar ao menu ");
 							resposta5 = teclado.nextInt();
@@ -339,10 +339,10 @@ public class programa {
 					}
 				}
 				break;
-			case 2:
-	
+			case 2: // SESSÃO VEICULO
+
 				int resposta1 = 0;
-				while(resposta1 != 6 ) {
+				while (resposta1 != 6) {
 					System.out.println("1 - Cadastrar Novo Veiculo ");
 					System.out.println("2 - Listar Veiculos ");
 					System.out.println("3 - Buscar Veiculo ");
@@ -350,63 +350,135 @@ public class programa {
 					System.out.println("5 - Deletar Veiculo ");
 					System.out.println("6 - Sair");
 					resposta1 = teclado.nextInt();
-					
-					switch(resposta1) {
+
+					switch (resposta1) {
 					case 1: // Cadastrar novo veiculo
-						
+
 						int resposta2 = 1;
-						while(resposta2 == 1) {
+						while (resposta2 == 1) {
 							Scanner tec = new Scanner(System.in);
 							Veiculo veiculo = new Veiculo();
 							VeiculoDao vDao = new VeiculoDao();
-							
+
 							System.out.println("Insira o numero de documento do cliente: ");
 							String doc = tec.nextLine();
-							
+
 							vDao.addNewVeiculo(doc, veiculo.createVeiculo());
 							System.out.println(" ");
-							
+
 							System.out.println("1 - Cadastrar outro veiculo ");
 							System.out.println("2 - Voltar ao menu ");
 							resposta2 = teclado.nextInt();
 						}
 						break;
 					case 2: // Listar todos os veiculos
-						
+
 						int resposta3 = 1;
-						while(resposta3 == 1) {
-							VeiculoDao v = new VeiculoDao(); 
+						while (resposta3 == 1) {
+							VeiculoDao v = new VeiculoDao();
 							v.read();
-							
+
 							System.out.println("1 - Recarregar a lista ");
 							System.out.println("2 - Voltar ao menu ");
 							resposta3 = teclado.nextInt();
-						}				
+						}
 						break;
-					case 3:
-						// implementar deste em diante
+					case 3: // Pesquisar por placa
+
+						int resposta4 = 1;
+						while (resposta4 == 1) {
+
+							Veiculo veic = new Veiculo();
+							VeiculoDao vd = new VeiculoDao();
+
+							System.out.print("Insira a placa do veiculo: ");
+							String placa = teclado.nextLine();
+
+							// Atribuindo o veiculo retornado pelo banco
+							// a variavel veic, e imprimindo logo abaixo
+							veic = vd.findByPlaca(placa);
+
+							System.out.println("          ==  Veiculo  ==  ");
+							System.out.println("Id Veiculo: " + veic.getId_veiculo());
+							System.out.println("Codigo do Proprietario: " + veic.getProprietario());
+							System.out.println("Placa: " + veic.getPlaca());
+							System.out.println("Fabricante: " + veic.getFabricante());
+							System.out.println("Modelo: " + veic.getModelo());
+							System.out.println("Tipo de veiculo: " + veic.getTipo_veiculo());
+							System.out.println("===================================================");
+							System.out.println("1 - Realizar nova pesquisa ");
+							System.out.println("2 - Voltar ao menu ");
+							resposta4 = teclado.nextInt();
+						}
 						break;
-					case 4:
+					case 4: // Atualizar cadastro de veiculo
+						
+						int resposta5 = 1;
+						while(resposta5 == 1) {
+						 	
+							Veiculo veiculoMemoria = new Veiculo(); // recebe o cliente do banco Veiculo
+							Veiculo veiculoAlterado = new Veiculo(); 
+							VeiculoDao v = new VeiculoDao();
+								 
+						    System.out.println("Insira a placa do carro: "); 
+						    String placa = teclado.nextLine();
+							
+						    // veiculoMemoria recebe o veiculo vindo do banco
+							veiculoMemoria = v.findByPlaca(placa);	 
+							
+							// veiculoAlterado recebe o veiculo com os novos dados
+							veiculoAlterado = veiculoMemoria.update(veiculoMemoria);
+							
+							// este comando faz a atualização do objeto no banco
+						    v.updateVeiculo(veiculoAlterado); 
+							
+							System.out.println("===================================================");
+							System.out.println("1 - Atualizar outro veiculo ");
+							System.out.println("2 - Voltar ao menu ");
+							resposta5 = teclado.nextInt();
+						}
 						break;
-					case 5: 
+					case 5: // Deletar veiculo 
+						
+						int resposta6 = 1;
+						while(resposta6 == 1) {
+							
+							Veiculo v = new Veiculo(); 
+							VeiculoDao vdao = new VeiculoDao();
+						
+							System.out.println("Informe a placa do veiculo a ser deletado: "); 
+							String placaDelete = teclado.nextLine();
+							  
+						    v = vdao.findByPlaca(placaDelete); 
+							vdao.deleteVeiculo(v);
+							
+							System.out.println("===================================================");
+							System.out.println("1 - Deletar outro veiculo ");
+							System.out.println("2 - Voltar ao menu ");
+							resposta6 = teclado.nextInt();
+						}
 						break;
-					case 6: 
+					case 6:
 						break;
+					default:
+						System.out.println("Atenção! Insira uma opção valida! ");
 					}
 				}
 				break;
-			case 3:
+			case 3: // SESSÃO SERVIÇOS
 				System.out.println("1 - Cadastrar Serviço");
 				System.out.println("2 - Listar Serviços ");
 				System.out.println("3 - Buscar Serviço ");
 				System.out.println("4 - Atualizar Cadastro de Serviço ");
 				System.out.println("5 - Deletar Serviço ");
 				break;
-			case 4:
+			case 4: // SESSÃO VENDAS
 				System.out.println("1 - Gerar Pedido ");
-			case 5:
+			case 5: // SESSÃO RELATORIOS
 				System.out.println("1 - Consultar Venda ");
 				System.out.println("2 - Relatório de Vendas ");
+				break;
+			case 6: // FINALIZAR PROGRAMA
 				break;
 			default:
 				System.out.println("Insira uma opção valida! ");
