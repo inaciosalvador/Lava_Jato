@@ -466,11 +466,126 @@ public class programa {
 				}
 				break;
 			case 3: // SESSÃO SERVIÇOS
-				System.out.println("1 - Cadastrar Serviço");
-				System.out.println("2 - Listar Serviços ");
-				System.out.println("3 - Buscar Serviço ");
-				System.out.println("4 - Atualizar Cadastro de Serviço ");
-				System.out.println("5 - Deletar Serviço ");
+				
+				int resposta2 = 1;
+				while(resposta2 != 6) {
+					
+					System.out.println("1 - Cadastrar Serviço");
+					System.out.println("2 - Listar Serviços ");
+					System.out.println("3 - Buscar Serviço ");
+					System.out.println("4 - Atualizar Cadastro de Serviço ");
+					System.out.println("5 - Deletar Serviço ");
+					System.out.println("6 - Sair");
+					resposta2 = teclado.nextInt();
+					
+					switch(resposta2) {
+					case 1: // Cadastrar Serviço
+						
+						int resposta7 = 1;
+						while(resposta7 == 1) {
+							
+							Servico serv = new Servico();
+							ServicoDao servDao = new ServicoDao();
+							
+							servDao.create(serv.create());
+							
+							System.out.println("===================================================");
+							System.out.println("1 - Cadastrar outro serviço ");
+							System.out.println("2 - Voltar ao menu ");
+							resposta7 = teclado.nextInt();
+						}
+						break;
+					case 2: // Listar serviços
+						
+						int resposta8 = 1;
+						while(resposta8 == 1) {
+							
+							ServicoDao s = new ServicoDao(); 
+							s.read();
+							
+							System.out.println("===================================================");
+							System.out.println("1 - Recarregar a lista ");
+							System.out.println("2 - Voltar ao menu ");
+							resposta8 = teclado.nextInt();
+						}
+						break;
+					case 3: // Buscar Serviços 
+						
+						int resposta9 = 1;
+						while(resposta9 == 1) {
+							
+							Servico serv = new Servico();
+							ServicoDao servDao = new ServicoDao();
+							
+							System.out.println("Insira o id do serviço: ");
+							int id = teclado.nextInt();
+							serv = servDao.findById(id);
+							
+							System.out.println("  * Informações do serviço * ");
+							System.out.println(" ");
+							System.out.println("Id: " + serv.getId_servico());
+							System.out.println("Descrição: " + serv.getDescricao());
+							System.out.println("Preço: " + serv.getPreco());	
+							
+							System.out.println("===================================================");
+							System.out.println("1 - Buscar outro serviço ");
+							System.out.println("2 - Voltar ao menu ");
+							resposta9 = teclado.nextInt();
+						}
+						break;
+					case 4: // Atualizar serviços
+						
+						int resposta10 = 1;
+						while(resposta10 == 1) {
+							
+							Servico servicoMemoria = new Servico(); // recebe o servico do banco Servico
+							Servico ServicoAlterado = new Servico(); 
+							ServicoDao s = new ServicoDao();
+							  
+							System.out.println("Insira o codigo do serviço a ser alterado: ");
+							int codigo = teclado.nextInt();
+							
+							// recebe o serviço do banco e aloca em memoria
+							servicoMemoria = s.findById(codigo);
+							
+							// recebe o serviço já alterado
+							ServicoAlterado = servicoMemoria.update(servicoMemoria); 
+							
+							// executa a troca no banco
+							s.updateServico(ServicoAlterado);
+						
+							System.out.println("===================================================");
+							System.out.println("1 - Atualizar outro serviço ");
+							System.out.println("2 - Voltar ao menu ");
+							resposta10 = teclado.nextInt();
+						}
+						break;
+					case 5: // deletar serviço
+						
+						int resposta11 = 1;
+						while(resposta11 == 1) {
+							
+							Servico s = new Servico();
+							ServicoDao sDao = new ServicoDao();
+							
+							System.out.println("Informe o codigo do serviço a ser deletado: ");
+							int idServico = teclado.nextInt();
+							
+							s = sDao.findById(idServico); 
+							sDao.deleteServico(s);
+							
+							System.out.println("===================================================");
+							System.out.println("1 - Atualizar outro serviço ");
+							System.out.println("2 - Voltar ao menu ");
+							resposta11 = teclado.nextInt();
+						}
+						break;
+					case 6:
+						break;	
+					default: 
+						System.out.println("Insira uma opção valida! ");
+					}
+				}
 				break;
 			case 4: // SESSÃO VENDAS
 				System.out.println("1 - Gerar Pedido ");

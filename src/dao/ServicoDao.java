@@ -28,22 +28,12 @@ public class ServicoDao {
 
 			statementServico.close();
 			connection.commit();
-
+			System.out.println("Serviço cadastrado com sucesso! ");
+			
 		} catch (SQLException e) {
-
 			connection.rollback();
 			System.out.println("Erro ao cadastrar serviço: " + e.getMessage());
 		} finally {
-
-			if (connection != null) {
-				try {
-
-					connection.close(); // Conexão fechada
-
-				} catch (SQLException e) {
-					e.printStackTrace();
-				}
-			}
 		}
 	}
 
@@ -89,12 +79,10 @@ public class ServicoDao {
 			System.out.println("Não encontrado: ");
 			e.printStackTrace();
 		} finally {
-			DB.closeResultSet(rs1);
-			DB.closeStatement(st1);
-			DB.closeConnection();
 		}
 	}
 
+	
 	public Servico findById(int id) throws SQLException {
 
 		String sqlBusca = "select * from servico where id_servico = (?)";
@@ -113,7 +101,6 @@ public class ServicoDao {
 			rs1 = st1.executeQuery(); // resultado da busca
 
 			while (rs1.next()) {
-				System.out.println("Id servico: " + rs1.getInt("id_servico"));
 				servico.setId_servico(rs1.getInt("id_servico"));
 				servico.setDescricao(rs1.getString("descricao"));
 				servico.setPreco(rs1.getDouble("preco"));
@@ -125,10 +112,7 @@ public class ServicoDao {
 			connection.rollback();
 			e.printStackTrace();
 		} finally {
-			DB.closeResultSet(rs1);
-			DB.closeStatement(st1);
 		}
-
 		return servico;
 	}
 
@@ -155,8 +139,6 @@ public class ServicoDao {
 			connection.rollback();
 			e.printStackTrace();
 		} finally {
-			DB.closeStatement(statementUpdate);
-			DB.closeConnection();
 		}
 	}
 
@@ -181,8 +163,6 @@ public class ServicoDao {
 			connection.rollback();
 			e.printStackTrace();
 		} finally {
-			DB.closeStatement(stServico);
-			DB.closeConnection();
 		}
 
 	}
