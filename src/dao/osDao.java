@@ -68,5 +68,31 @@ public class osDao {
         }
 	}
 	
-	
+	public void consultarVenda(int id) throws SQLException {
+		
+		String sql = "select * from os where id_ordem = (?)";
+		PreparedStatement st1 = null;
+		ResultSet rs1 = null;
+		
+		try {
+			connection = DB.getConnection();
+			connection.setAutoCommit(false); // desativando o autocommit
+			st1 = connection.prepareStatement(sql);
+			st1.setInt(1, id);
+			rs1 = st1.executeQuery();
+			
+			while(rs1.next()) {
+				System.out.println("================================================");
+				System.out.println("  Id Ordem de serviço: " + rs1.getInt("id_ordem"));
+				System.out.println("  Id Cliente: " + rs1.getInt("id_cliente"));
+				System.out.println("  Observação: " + rs1.getString("observacao"));
+				System.out.println("  Valor total: " + rs1.getDouble("valor_os"));
+				System.out.println("================================================");
+			}
+			connection.commit();
+		} catch (Exception e) {
+			connection.rollback();
+			e.printStackTrace();
+		}
+	}
 }
