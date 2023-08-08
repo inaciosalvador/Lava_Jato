@@ -4,8 +4,12 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.NumberFormat;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.Date;
+import java.util.Locale;
 
 import db.DB;
 import model.entities.OrdemServico;
@@ -42,9 +46,8 @@ public class osDao {
   
 			st1 = connection.prepareStatement(sql2);
 			
-			DateTimeFormatter fmt = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
-			LocalDateTime data = LocalDateTime.now();
 			
+			LocalDateTime data = LocalDateTime.now();
 			java.sql.Timestamp time = java.sql.Timestamp.valueOf(data);
 
 			for(Servico s : os.getServico()) {
@@ -94,5 +97,48 @@ public class osDao {
 			connection.rollback();
 			e.printStackTrace();
 		}
+	}
+	
+	public void consultarFaturamento(String inicio, String fim) throws SQLException {
+		
+		String sql = "SELECT sum(preco) FROM pedido p "
+				+ "JOIN servico s ON p.id_servico = s.id_servico "
+				+ "WHERE data_servico BETWEEN (?) AND (?) "
+				+ "ORDER BY preco DESC;";
+		
+		PreparedStatement st1 = null;
+		ResultSet rs1 = null;
+		
+		try {
+			connection = DB.getConnection();
+			connection.setAutoCommit(false); // desativando o autocommit
+			st1 = connection.prepareStatement(sql);
+			st1.setString(1, inicio);
+			st1.setString(2, fim);
+			rs1 = st1.executeQuery();
+			
+			DateTimeFormatter userInputFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+			
+			String inicio1 = LocalDate.parse(inicio, userInputFormatter)
+                       .format(DateTimeFormatter.ofPattern("dd/MM/yyyy"));
+
+			String fim1 = LocalDate.parse(fim, userInputFormatter)
+                     .format(DateTimeFormatter.ofPattern("dd/MM/yyyy"));
+
+			NumberFormat faturamento = NumberFormat.getCurrencyInstance(new Locale("pt", "BR"));
+			while(rs1.next()) {
+				System.out.println("================================================");
+				System.out.println("Valor faturado entre " + inicio1 +" e " + fim1 + " é de: R$ " + faturamento.format(rs1.getDouble("sum(preco)")));
+				System.out.println("================================================");
+			}
+			connection.commit();
+		} catch (Exception e) {
+			connection.rollback();
+			e.printStackTrace();
+		}
+		
+		
+		
+		
 	}
 }
